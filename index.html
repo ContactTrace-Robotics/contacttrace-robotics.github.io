@@ -66,25 +66,15 @@
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
-    }
-
-    /* -------------------------------------------------
-       NAVIGATION
-    ------------------------------------------------- */
-
     nav {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
-
       z-index: 1000;
 
       background: rgba(7, 11, 20, 0.78);
       backdrop-filter: blur(18px);
-
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
@@ -106,7 +96,6 @@
 
       font-size: 1.08rem;
       font-weight: 800;
-      letter-spacing: 0.1px;
     }
 
     .logo-mark {
@@ -159,14 +148,6 @@
       border: 1px solid rgba(255, 255, 255, 0.1);
       background: rgba(255, 255, 255, 0.025);
     }
-
-    .nav-github:hover {
-      border-color: rgba(102, 229, 255, 0.28);
-    }
-
-    /* -------------------------------------------------
-       HERO
-    ------------------------------------------------- */
 
     .hero {
       min-height: 100vh;
@@ -338,22 +319,18 @@
 
     .btn-primary:hover {
       transform: translateY(-3px);
-
       box-shadow:
         0 12px 32px rgba(102, 229, 255, 0.23);
     }
 
     .btn-secondary {
       color: #ebf3ff;
-
       background: rgba(255, 255, 255, 0.025);
-
       border: 1px solid rgba(255, 255, 255, 0.11);
     }
 
     .btn-secondary:hover {
       transform: translateY(-3px);
-
       border-color: rgba(102, 229, 255, 0.26);
       background: rgba(255, 255, 255, 0.05);
     }
@@ -376,10 +353,6 @@
       color: #73869e;
       font-size: 0.78rem;
     }
-
-    /* -------------------------------------------------
-       3D ROBOT VIEWER
-    ------------------------------------------------- */
 
     .robot-panel {
       height: 500px;
@@ -447,7 +420,6 @@
 
     #robot-viewer canvas {
       display: block;
-
       width: 100%;
       height: 100%;
     }
@@ -564,10 +536,6 @@
       color: var(--cyan);
     }
 
-    /* -------------------------------------------------
-       GENERAL SECTIONS
-    ------------------------------------------------- */
-
     section {
       padding: 105px 24px;
     }
@@ -607,10 +575,6 @@
 
       margin-bottom: 46px;
     }
-
-    /* -------------------------------------------------
-       RESEARCH
-    ------------------------------------------------- */
 
     .grid {
       display: grid;
@@ -669,23 +633,16 @@
 
     .card h3 {
       margin-bottom: 10px;
-
       font-size: 1.2rem;
     }
 
     .card p {
       color: #8fa1b7;
-
       font-size: 0.92rem;
     }
 
-    /* -------------------------------------------------
-       PIPELINE
-    ------------------------------------------------- */
-
     .pipeline {
       margin-top: 80px;
-
       padding: 36px;
 
       border-radius: 22px;
@@ -718,6 +675,7 @@
 
     .pipeline-row {
       display: grid;
+
       grid-template-columns:
         1fr auto
         1fr auto
@@ -746,13 +704,11 @@
 
     .pipeline-item strong {
       margin-bottom: 4px;
-
       font-size: 0.92rem;
     }
 
     .pipeline-item span {
       color: #788da4;
-
       font-size: 0.76rem;
     }
 
@@ -762,10 +718,6 @@
 
       font-size: 1.25rem;
     }
-
-    /* -------------------------------------------------
-       PROJECTS
-    ------------------------------------------------- */
 
     .projects-section {
       background:
@@ -831,10 +783,6 @@
       font-size: 0.69rem;
     }
 
-    /* -------------------------------------------------
-       TECHNOLOGY
-    ------------------------------------------------- */
-
     .tech-row {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -854,7 +802,6 @@
 
     .tech-item strong {
       display: block;
-
       margin-bottom: 4px;
 
       color: #f4f8ff;
@@ -863,13 +810,8 @@
 
     .tech-item span {
       color: #73869d;
-
       font-size: 0.77rem;
     }
-
-    /* -------------------------------------------------
-       COLLABORATION
-    ------------------------------------------------- */
 
     .collaborate-section {
       background:
@@ -919,10 +861,6 @@
       color: #9dacc0;
     }
 
-    /* -------------------------------------------------
-       ABOUT
-    ------------------------------------------------- */
-
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -933,7 +871,6 @@
 
     .about-copy p {
       color: #92a4b9;
-
       margin-bottom: 15px;
     }
 
@@ -962,9 +899,118 @@
       font-weight: 700;
     }
 
-    /* -------------------------------------------------
-       FOOTER
-    ------------------------------------------------- */
+    .founder-card {
+      margin-top: 70px;
+
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 28px;
+      align-items: center;
+
+      padding: 34px;
+
+      border-radius: 22px;
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(102, 229, 255, 0.045),
+          rgba(157, 140, 255, 0.035)
+        );
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .founder-card::after {
+      content: "";
+
+      position: absolute;
+
+      width: 250px;
+      height: 250px;
+
+      right: -100px;
+      top: -110px;
+
+      border-radius: 50%;
+
+      background: rgba(87, 214, 255, 0.06);
+      filter: blur(45px);
+
+      pointer-events: none;
+    }
+
+    .founder-avatar {
+      width: 100px;
+      height: 100px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(102, 229, 255, 0.18),
+          rgba(157, 140, 255, 0.18)
+        );
+
+      border: 1px solid rgba(102, 229, 255, 0.2);
+
+      color: #9eefff;
+
+      font-size: 1.7rem;
+      font-weight: 800;
+
+      position: relative;
+      z-index: 2;
+    }
+
+    .founder-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .founder-content h3 {
+      font-size: 1.65rem;
+      margin-bottom: 2px;
+    }
+
+    .founder-role {
+      color: var(--cyan);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+
+    .founder-content p {
+      max-width: 760px;
+
+      color: #91a3b8;
+
+      font-size: 0.92rem;
+    }
+
+    .founder-links {
+      display: flex;
+      gap: 18px;
+
+      margin-top: 15px;
+    }
+
+    .founder-links a {
+      color: #d9efff;
+      font-size: 0.82rem;
+
+      transition: 0.2s ease;
+    }
+
+    .founder-links a:hover {
+      color: var(--cyan);
+    }
 
     footer {
       padding: 34px 24px;
@@ -997,10 +1043,6 @@
       color: var(--cyan);
     }
 
-    /* -------------------------------------------------
-       SCROLL ANIMATION
-    ------------------------------------------------- */
-
     .fade-up {
       opacity: 0;
 
@@ -1013,13 +1055,8 @@
 
     .fade-up.visible {
       opacity: 1;
-
       transform: translateY(0);
     }
-
-    /* -------------------------------------------------
-       MOBILE
-    ------------------------------------------------- */
 
     @media (max-width: 980px) {
       .hero-inner {
@@ -1092,612 +1129,643 @@
       .collab-box {
         padding: 45px 22px;
       }
+
+      .founder-card {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
 
-
 <body>
 
-  <!-- =================================================
-       NAVIGATION
-  ================================================== -->
+<nav>
+  <div class="nav-container">
 
-  <nav>
-    <div class="nav-container">
+    <a href="#home" class="logo">
+      <div class="logo-mark">CT</div>
 
-      <a href="#home" class="logo">
-        <div class="logo-mark">CT</div>
-        <div>
-          ContactTrace <span>Robotics</span>
-        </div>
+      <div>
+        ContactTrace <span>Robotics</span>
+      </div>
+    </a>
+
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#collaborate">Collaborate</a>
+      <a href="#about">About</a>
+
+      <a
+        class="nav-github"
+        href="https://github.com/ContactTrace-Robotics"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub ↗
       </a>
+    </div>
 
-      <div class="nav-links">
-        <a href="#research">Research</a>
-        <a href="#projects">Projects</a>
-        <a href="#collaborate">Collaborate</a>
-        <a href="#about">About</a>
+  </div>
+</nav>
+
+
+<header class="hero" id="home">
+
+  <div class="hero-glow-one"></div>
+  <div class="hero-glow-two"></div>
+
+  <div class="hero-inner">
+
+    <div>
+
+      <div class="eyebrow">
+        <span class="eyebrow-dot"></span>
+        Independent Robotics Research Platform
+      </div>
+
+      <h1>
+        Evaluate robots
+        <span class="gradient-text">
+          before reality does.
+        </span>
+      </h1>
+
+      <p class="hero-copy">
+        ContactTrace Robotics explores
+        <strong>
+          simulation, robot-policy benchmarking,
+          failure analysis and sim-to-real validation
+        </strong>
+        to make robotic systems more measurable,
+        reproducible and reliable before deployment.
+      </p>
+
+      <div class="buttons">
+
+        <a href="#projects" class="btn btn-primary">
+          Explore Research
+          <span>→</span>
+        </a>
+
+        <a href="#collaborate" class="btn btn-secondary">
+          Collaborate With Us
+        </a>
+
+      </div>
+
+      <div class="hero-mini-stats">
+
+        <div class="hero-mini-stat">
+          <strong>Simulation</strong>
+          <span>Isaac Sim · MuJoCo</span>
+        </div>
+
+        <div class="hero-mini-stat">
+          <strong>Evaluation</strong>
+          <span>Benchmarks · CI · Metrics</span>
+        </div>
+
+        <div class="hero-mini-stat">
+          <strong>Reality</strong>
+          <span>Robot validation · Sim-to-real</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="robot-panel">
+
+      <div id="robot-viewer"></div>
+
+      <div class="viewer-label">
+        <span class="status-dot"></span>
+        INTERACTIVE ROBOT TWIN
+      </div>
+
+      <div class="viewer-state">
+        LIVE SIMULATION VIEW
+      </div>
+
+      <div class="simulation-route">
+        SIM
+        <span>→</span>
+        BENCHMARK
+        <span>→</span>
+        VALIDATE
+        <span>→</span>
+        REAL
+      </div>
+
+      <div class="viewer-hint">
+        Drag to rotate · Scroll to zoom
+      </div>
+
+    </div>
+
+  </div>
+
+</header>
+
+
+<section id="research">
+
+  <div class="container fade-up">
+
+    <div class="section-label">
+      Research
+    </div>
+
+    <h2 class="section-title">
+      Research areas
+    </h2>
+
+    <p class="section-intro">
+      Our work focuses on methods and infrastructure for
+      understanding robot behavior, measuring performance,
+      exposing failure modes and improving deployment readiness.
+    </p>
+
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="card-number">01</div>
+
+        <h3>Robot Simulation</h3>
+
+        <p>
+          Physics-based robot and environment simulation
+          for manipulation, navigation and embodied systems.
+        </p>
+      </div>
+
+
+      <div class="card">
+        <div class="card-number">02</div>
+
+        <h3>Policy Evaluation</h3>
+
+        <p>
+          Automated and repeatable testing of robotic
+          policies across controlled scenarios and environments.
+        </p>
+      </div>
+
+
+      <div class="card">
+        <div class="card-number">03</div>
+
+        <h3>Failure Analysis</h3>
+
+        <p>
+          Identifying failure patterns and generating
+          targeted scenarios that expose weaknesses
+          in robotic policies.
+        </p>
+      </div>
+
+
+      <div class="card">
+        <div class="card-number">04</div>
+
+        <h3>Sim-to-Real</h3>
+
+        <p>
+          Comparing simulation and physical robot behavior
+          to identify fidelity gaps and improve transfer.
+        </p>
+      </div>
+
+
+      <div class="card">
+        <div class="card-number">05</div>
+
+        <h3>Robot Manipulation</h3>
+
+        <p>
+          Experimental work involving grasping,
+          Cartesian control, interaction and
+          manipulation tasks.
+        </p>
+      </div>
+
+
+      <div class="card">
+        <div class="card-number">06</div>
+
+        <h3>Benchmarking</h3>
+
+        <p>
+          Objective metrics, batch experiments,
+          automated regression testing and
+          structured benchmark reporting.
+        </p>
+      </div>
+
+    </div>
+
+
+    <div class="pipeline fade-up">
+
+      <div class="pipeline-top">
+
+        <div>
+          <div class="section-label">
+            Evaluation Loop
+          </div>
+
+          <h3>
+            From simulation to measurable evidence
+          </h3>
+        </div>
+
+        <p>
+          Robotics systems should be evaluated systematically
+          before hardware deployment rather than relying only
+          on visually successful demonstrations.
+        </p>
+
+      </div>
+
+
+      <div class="pipeline-row">
+
+        <div class="pipeline-item">
+          <strong>01 · Simulate</strong>
+          <span>
+            Build reproducible robot and environment scenarios.
+          </span>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-item">
+          <strong>02 · Evaluate</strong>
+          <span>
+            Measure success, latency, errors and failure modes.
+          </span>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-item">
+          <strong>03 · Diagnose</strong>
+          <span>
+            Identify weaknesses and generate targeted tests.
+          </span>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-item">
+          <strong>04 · Validate</strong>
+          <span>
+            Compare against real-world robot behavior.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="projects" class="projects-section">
+
+  <div class="container fade-up">
+
+    <div class="section-label">
+      Projects
+    </div>
+
+    <h2 class="section-title">
+      Featured research systems
+    </h2>
+
+    <p class="section-intro">
+      Experimental systems exploring robotics simulation,
+      automated evaluation and real-world deployment readiness.
+    </p>
+
+
+    <div class="grid">
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                PROJECT 01
+              </div>
+
+              <h3>
+                Robot Evaluation Platform
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              ACTIVE
+            </div>
+
+          </div>
+
+          <p>
+            Automated infrastructure for running robot-policy
+            experiments, detecting regressions, classifying
+            failures and producing structured evaluation reports.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">MuJoCo</span>
+          <span class="tag">FastAPI</span>
+          <span class="tag">CI</span>
+          <span class="tag">Benchmarking</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                PROJECT 02
+              </div>
+
+              <h3>
+                Real2Isaac
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              ACTIVE
+            </div>
+
+          </div>
+
+          <p>
+            Real-world-to-simulation pipeline that reconstructs
+            captured environments and prepares them for
+            physics and robot interaction inside NVIDIA Isaac Sim.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Isaac Sim</span>
+          <span class="tag">COLMAP</span>
+          <span class="tag">Gaussian Splatting</span>
+          <span class="tag">USD</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                PROJECT 03
+              </div>
+
+              <h3>
+                Failure-Aware Evaluation
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              RESEARCH
+            </div>
+
+          </div>
+
+          <p>
+            Investigation of automated robot-policy failure
+            discovery and targeted scenario generation for
+            evaluation, debugging and iterative improvement.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Failure Analysis</span>
+          <span class="tag">Sim-to-Real</span>
+          <span class="tag">Manipulation</span>
+          <span class="tag">Robotics AI</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="tech-row">
+
+      <div class="tech-item">
+        <strong>Isaac Sim</strong>
+        <span>Simulation & Digital Twins</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>MuJoCo</strong>
+        <span>Physics & Evaluation</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>ROS 2</strong>
+        <span>Robot Integration</span>
+      </div>
+
+      <div class="tech-item">
+        <strong>Franka</strong>
+        <span>Manipulation Research</span>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="collaborate" class="collaborate-section">
+
+  <div class="container fade-up">
+
+    <div class="collab-box">
+
+      <div class="section-label">
+        Open Research
+      </div>
+
+      <h2>
+        Interested in building robotics research together?
+      </h2>
+
+      <p>
+        ContactTrace Robotics welcomes students,
+        researchers and engineers interested in
+        robotics simulation, manipulation, policy evaluation,
+        benchmarking and sim-to-real experimentation.
+      </p>
+
+      <div class="buttons" style="justify-content:center;">
 
         <a
-          class="nav-github"
           href="https://github.com/ContactTrace-Robotics"
           target="_blank"
           rel="noopener noreferrer"
+          class="btn btn-primary"
         >
-          GitHub ↗
+          View GitHub
+          <span>↗</span>
         </a>
-      </div>
 
-    </div>
-  </nav>
+        <a
+          href="mailto:contacttrace.robotics@gmail.com"
+          class="btn btn-secondary"
+        >
+          Contact for Collaboration
+        </a>
 
-
-  <!-- =================================================
-       HERO
-  ================================================== -->
-
-  <header class="hero" id="home">
-
-    <div class="hero-glow-one"></div>
-    <div class="hero-glow-two"></div>
-
-    <div class="hero-inner">
-
-      <div>
-
-        <div class="eyebrow">
-          <span class="eyebrow-dot"></span>
-          Independent Robotics Research Platform
-        </div>
-
-        <h1>
-          Evaluate robots
-          <span class="gradient-text">
-            before reality does.
-          </span>
-        </h1>
-
-        <p class="hero-copy">
-          ContactTrace Robotics explores
-          <strong>simulation, robot-policy benchmarking,
-          failure analysis and sim-to-real validation</strong>
-          to make robotic systems more measurable,
-          reproducible and reliable before deployment.
-        </p>
-
-        <div class="buttons">
-
-          <a
-            href="#projects"
-            class="btn btn-primary"
-          >
-            Explore Research
-            <span>→</span>
-          </a>
-
-          <a
-            href="#collaborate"
-            class="btn btn-secondary"
-          >
-            Collaborate With Us
-          </a>
-
-        </div>
-
-        <div class="hero-mini-stats">
-
-          <div class="hero-mini-stat">
-            <strong>Simulation</strong>
-            <span>Isaac Sim · MuJoCo</span>
-          </div>
-
-          <div class="hero-mini-stat">
-            <strong>Evaluation</strong>
-            <span>Benchmarks · CI · Metrics</span>
-          </div>
-
-          <div class="hero-mini-stat">
-            <strong>Reality</strong>
-            <span>Robot validation · Sim-to-real</span>
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- 3D VIEWER -->
-
-      <div class="robot-panel">
-
-        <div id="robot-viewer"></div>
-
-        <div class="viewer-label">
-          <span class="status-dot"></span>
-          INTERACTIVE ROBOT TWIN
-        </div>
-
-        <div class="viewer-state">
-          LIVE SIMULATION VIEW
-        </div>
-
-        <div class="simulation-route">
-          SIM
-          <span>→</span>
-          BENCHMARK
-          <span>→</span>
-          VALIDATE
-          <span>→</span>
-          REAL
-        </div>
-
-        <div class="viewer-hint">
-          Drag to rotate · Scroll to zoom
-        </div>
+        <a
+          href="https://www.linkedin.com/company/contacttrace-robotics/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-secondary"
+        >
+          LinkedIn
+          <span>↗</span>
+        </a>
 
       </div>
 
     </div>
 
-  </header>
+  </div>
 
+</section>
 
-  <!-- =================================================
-       RESEARCH
-  ================================================== -->
 
-  <section id="research">
+<section id="about">
 
-    <div class="container fade-up">
+  <div class="container fade-up">
 
-      <div class="section-label">
-        Research
-      </div>
+    <div class="about-grid">
 
-      <h2 class="section-title">
-        Research areas
-      </h2>
-
-      <p class="section-intro">
-        Our work focuses on methods and infrastructure for
-        understanding robot behavior, measuring performance,
-        exposing failure modes and improving deployment readiness.
-      </p>
-
-
-      <div class="grid">
-
-        <div class="card">
-          <div class="card-number">01</div>
-
-          <h3>Robot Simulation</h3>
-
-          <p>
-            Physics-based robot and environment simulation
-            for manipulation, navigation and embodied systems.
-          </p>
-        </div>
-
-
-        <div class="card">
-          <div class="card-number">02</div>
-
-          <h3>Policy Evaluation</h3>
-
-          <p>
-            Automated and repeatable testing of robotic
-            policies across controlled scenarios and environments.
-          </p>
-        </div>
-
-
-        <div class="card">
-          <div class="card-number">03</div>
-
-          <h3>Failure Analysis</h3>
-
-          <p>
-            Identifying failure patterns and generating
-            targeted scenarios that expose weaknesses
-            in robotic policies.
-          </p>
-        </div>
-
-
-        <div class="card">
-          <div class="card-number">04</div>
-
-          <h3>Sim-to-Real</h3>
-
-          <p>
-            Comparing simulation and physical robot behavior
-            to identify fidelity gaps and improve transfer.
-          </p>
-        </div>
-
-
-        <div class="card">
-          <div class="card-number">05</div>
-
-          <h3>Robot Manipulation</h3>
-
-          <p>
-            Experimental work involving grasping,
-            Cartesian control, interaction and
-            manipulation tasks.
-          </p>
-        </div>
-
-
-        <div class="card">
-          <div class="card-number">06</div>
-
-          <h3>Benchmarking</h3>
-
-          <p>
-            Objective metrics, batch experiments,
-            automated regression testing and
-            structured benchmark reporting.
-          </p>
-        </div>
-
-      </div>
-
-
-      <!-- PIPELINE -->
-
-      <div class="pipeline fade-up">
-
-        <div class="pipeline-top">
-
-          <div>
-            <div class="section-label">
-              Evaluation Loop
-            </div>
-
-            <h3>
-              From simulation to measurable evidence
-            </h3>
-          </div>
-
-          <p>
-            Robotics systems should be evaluated systematically
-            before hardware deployment rather than relying only
-            on visually successful demonstrations.
-          </p>
-
-        </div>
-
-
-        <div class="pipeline-row">
-
-          <div class="pipeline-item">
-            <strong>01 · Simulate</strong>
-            <span>
-              Build reproducible robot and environment scenarios.
-            </span>
-          </div>
-
-          <div class="pipeline-arrow">
-            →
-          </div>
-
-          <div class="pipeline-item">
-            <strong>02 · Evaluate</strong>
-            <span>
-              Measure success, latency, errors and failure modes.
-            </span>
-          </div>
-
-          <div class="pipeline-arrow">
-            →
-          </div>
-
-          <div class="pipeline-item">
-            <strong>03 · Diagnose</strong>
-            <span>
-              Identify weaknesses and generate targeted tests.
-            </span>
-          </div>
-
-          <div class="pipeline-arrow">
-            →
-          </div>
-
-          <div class="pipeline-item">
-            <strong>04 · Validate</strong>
-            <span>
-              Compare against real-world robot behavior.
-            </span>
-          </div>
-
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================================
-       PROJECTS
-  ================================================== -->
-
-  <section
-    id="projects"
-    class="projects-section"
-  >
-
-    <div class="container fade-up">
-
-      <div class="section-label">
-        Projects
-      </div>
-
-      <h2 class="section-title">
-        Featured research systems
-      </h2>
-
-      <p class="section-intro">
-        Experimental systems exploring robotics simulation,
-        automated evaluation and real-world deployment readiness.
-      </p>
-
-
-      <div class="grid">
-
-        <!-- PROJECT 1 -->
-
-        <div class="card project-card">
-
-          <div>
-
-            <div class="project-title-row">
-
-              <div>
-                <div class="card-number">
-                  PROJECT 01
-                </div>
-
-                <h3>
-                  Robot Evaluation Platform
-                </h3>
-              </div>
-
-              <div class="project-badge">
-                ACTIVE
-              </div>
-
-            </div>
-
-            <p>
-              Automated infrastructure for running robot-policy
-              experiments, detecting regressions, classifying
-              failures and producing structured evaluation reports.
-            </p>
-
-          </div>
-
-          <div class="tags">
-
-            <span class="tag">
-              MuJoCo
-            </span>
-
-            <span class="tag">
-              FastAPI
-            </span>
-
-            <span class="tag">
-              CI
-            </span>
-
-            <span class="tag">
-              Benchmarking
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROJECT 2 -->
-
-        <div class="card project-card">
-
-          <div>
-
-            <div class="project-title-row">
-
-              <div>
-                <div class="card-number">
-                  PROJECT 02
-                </div>
-
-                <h3>
-                  Real2Isaac
-                </h3>
-              </div>
-
-              <div class="project-badge">
-                ACTIVE
-              </div>
-
-            </div>
-
-            <p>
-              Real-world-to-simulation pipeline that reconstructs
-              captured environments and prepares them for
-              physics and robot interaction inside NVIDIA Isaac Sim.
-            </p>
-
-          </div>
-
-          <div class="tags">
-
-            <span class="tag">
-              Isaac Sim
-            </span>
-
-            <span class="tag">
-              COLMAP
-            </span>
-
-            <span class="tag">
-              Gaussian Splatting
-            </span>
-
-            <span class="tag">
-              USD
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <!-- PROJECT 3 -->
-
-        <div class="card project-card">
-
-          <div>
-
-            <div class="project-title-row">
-
-              <div>
-                <div class="card-number">
-                  PROJECT 03
-                </div>
-
-                <h3>
-                  Failure-Aware Evaluation
-                </h3>
-              </div>
-
-              <div class="project-badge">
-                RESEARCH
-              </div>
-
-            </div>
-
-            <p>
-              Investigation of automated robot-policy failure
-              discovery and targeted scenario generation for
-              evaluation, debugging and iterative improvement.
-            </p>
-
-          </div>
-
-          <div class="tags">
-
-            <span class="tag">
-              Failure Analysis
-            </span>
-
-            <span class="tag">
-              Sim-to-Real
-            </span>
-
-            <span class="tag">
-              Manipulation
-            </span>
-
-            <span class="tag">
-              Robotics AI
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="tech-row">
-
-        <div class="tech-item">
-          <strong>Isaac Sim</strong>
-          <span>
-            Simulation & Digital Twins
-          </span>
-        </div>
-
-        <div class="tech-item">
-          <strong>MuJoCo</strong>
-          <span>
-            Physics & Evaluation
-          </span>
-        </div>
-
-        <div class="tech-item">
-          <strong>ROS 2</strong>
-          <span>
-            Robot Integration
-          </span>
-        </div>
-
-        <div class="tech-item">
-          <strong>Franka</strong>
-          <span>
-            Manipulation Research
-          </span>
-        </div>
-
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- =================================================
-       COLLABORATE
-  ================================================== -->
-
-  <section
-    id="collaborate"
-    class="collaborate-section"
-  >
-
-    <div class="container fade-up">
-
-      <div class="collab-box">
+      <div class="about-copy">
 
         <div class="section-label">
-          Open Research
+          About
         </div>
 
-        <h2>
-          Interested in building
-          robotics research together?
+        <h2 class="section-title">
+          ContactTrace Robotics
         </h2>
 
         <p>
-          ContactTrace Robotics welcomes students,
-          researchers and engineers interested in
-          robotics simulation, manipulation, policy evaluation,
-          benchmarking and sim-to-real experimentation.
+          ContactTrace Robotics is an independent robotics
+          research initiative focused on making robot
+          development more measurable and reproducible.
         </p>
 
-        <div class="buttons" style="justify-content:center;">
+        <p>
+          The platform explores simulation infrastructure,
+          automated testing, failure-aware evaluation and
+          sim-to-real validation for embodied robotic systems.
+        </p>
+
+      </div>
+
+
+      <div class="about-list">
+
+        <div class="about-list-item">
+          <strong>01</strong>
+          Independent robotics research
+        </div>
+
+        <div class="about-list-item">
+          <strong>02</strong>
+          Open technical experimentation
+        </div>
+
+        <div class="about-list-item">
+          <strong>03</strong>
+          Student and researcher collaboration
+        </div>
+
+        <div class="about-list-item">
+          <strong>04</strong>
+          Reproducible evaluation and benchmarking
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="founder-card">
+
+      <div class="founder-avatar">
+        MH
+      </div>
+
+      <div class="founder-content">
+
+        <div class="section-label">
+          Founder
+        </div>
+
+        <h3>
+          M A Hafiz
+        </h3>
+
+        <div class="founder-role">
+          Founder & Robotics Research Engineer
+        </div>
+
+        <p>
+          Robotics engineer and researcher working on robot simulation,
+          manipulation, automated evaluation, digital twins,
+          robot control and sim-to-real systems.
+        </p>
+
+        <div class="founder-links">
 
           <a
-            href="https://github.com/ContactTrace-Robotics"
+            href="https://github.com/MAHAFIZS"
             target="_blank"
             rel="noopener noreferrer"
-            class="btn btn-primary"
           >
-            View GitHub
-            <span>↗</span>
+            GitHub ↗
           </a>
 
           <a
-            href="mailto:mahafizsourav@gmail.com"
-            class="btn btn-secondary"
+            href="www.linkedin.com/in/hafiz-ma"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            Contact for Collaboration
+            LinkedIn ↗
           </a>
 
         </div>
@@ -1706,1369 +1774,1164 @@
 
     </div>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- =================================================
-       ABOUT
-  ================================================== -->
+<footer>
 
-  <section id="about">
+  <div class="footer-inner">
 
-    <div class="container fade-up">
+    <div>
+      © 2026 ContactTrace Robotics
+    </div>
 
-      <div class="about-grid">
+    <div class="footer-links">
 
-        <div class="about-copy">
+      <a href="#research">
+        Research
+      </a>
 
-          <div class="section-label">
-            About
-          </div>
+      <a href="#projects">
+        Projects
+      </a>
 
-          <h2 class="section-title">
-            ContactTrace Robotics
-          </h2>
-
-          <p>
-            ContactTrace Robotics is an independent robotics
-            research initiative focused on making robot
-            development more measurable and reproducible.
-          </p>
-
-          <p>
-            The platform explores simulation infrastructure,
-            automated testing, failure-aware evaluation and
-            sim-to-real validation for embodied robotic systems.
-          </p>
-
-        </div>
-
-
-        <div class="about-list">
-
-          <div class="about-list-item">
-            <strong>01</strong>
-            Independent robotics research
-          </div>
-
-          <div class="about-list-item">
-            <strong>02</strong>
-            Open technical experimentation
-          </div>
-
-          <div class="about-list-item">
-            <strong>03</strong>
-            Student and researcher collaboration
-          </div>
-
-          <div class="about-list-item">
-            <strong>04</strong>
-            Reproducible evaluation and benchmarking
-          </div>
-
-        </div>
-
-      </div>
+      <a
+        href="https://github.com/ContactTrace-Robotics"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        GitHub
+      </a>
 
     </div>
 
-  </section>
+  </div>
+
+</footer>
 
 
-  <!-- =================================================
-       FOOTER
-  ================================================== -->
-
-  <footer>
-
-    <div class="footer-inner">
-
-      <div>
-        © 2026 ContactTrace Robotics
-      </div>
-
-      <div class="footer-links">
-
-        <a href="#research">
-          Research
-        </a>
-
-        <a href="#projects">
-          Projects
-        </a>
-
-        <a
-          href="https://github.com/ContactTrace-Robotics"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitHub
-        </a>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =================================================
-       THREE.JS IMPORT MAP
-  ================================================== -->
-
-  <script type="importmap">
-  {
-    "imports": {
-      "three":
-        "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js",
-
-      "three/addons/":
-        "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"
-    }
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.185.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.185.0/examples/jsm/"
   }
-  </script>
+}
+</script>
 
 
-  <!-- =================================================
-       JAVASCRIPT
-  ================================================== -->
+<script type="module">
 
-  <script type="module">
+  import * as THREE from "three";
 
-    import * as THREE from "three";
-
-    import {
-      OrbitControls
-    }
-    from "three/addons/controls/OrbitControls.js";
+  import {
+    OrbitControls
+  } from "three/addons/controls/OrbitControls.js";
 
 
-    /* ================================================
-       SCROLL REVEAL
-    ================================================= */
+  const observer =
+    new IntersectionObserver(
+      entries => {
 
-    const observer =
-      new IntersectionObserver(
-        entries => {
+        entries.forEach(entry => {
 
-          entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
 
-            if (entry.isIntersecting) {
+        });
 
-              entry.target.classList.add(
-                "visible"
-              );
-
-            }
-
-          });
-
-        },
-        {
-          threshold: 0.1
-        }
-      );
-
-
-    document
-      .querySelectorAll(".fade-up")
-      .forEach(element => {
-
-        observer.observe(element);
-
-      });
-
-
-    /* ================================================
-       THREE.JS SCENE
-    ================================================= */
-
-    const container =
-      document.getElementById(
-        "robot-viewer"
-      );
-
-
-    const scene =
-      new THREE.Scene();
-
-
-    /* -----------------------------------------------
-       CAMERA
-    ------------------------------------------------ */
-
-    const camera =
-      new THREE.PerspectiveCamera(
-        38,
-        container.clientWidth /
-        container.clientHeight,
-        0.1,
-        100
-      );
-
-
-    camera.position.set(
-      4.4,
-      2.7,
-      5.8
+      },
+      {
+        threshold: 0.1
+      }
     );
 
 
-    /* -----------------------------------------------
-       RENDERER
-    ------------------------------------------------ */
-
-    const renderer =
-      new THREE.WebGLRenderer({
-        antialias: true,
-        alpha: true
-      });
+  document
+    .querySelectorAll(".fade-up")
+    .forEach(element => {
+      observer.observe(element);
+    });
 
 
-    renderer.setPixelRatio(
-      Math.min(
-        window.devicePixelRatio,
-        2
-      )
+  const container =
+    document.getElementById("robot-viewer");
+
+
+  const scene =
+    new THREE.Scene();
+
+
+  const camera =
+    new THREE.PerspectiveCamera(
+      38,
+      container.clientWidth /
+      container.clientHeight,
+      0.1,
+      100
     );
 
 
-    renderer.setSize(
-      container.clientWidth,
-      container.clientHeight
+  camera.position.set(
+    4.4,
+    2.7,
+    5.8
+  );
+
+
+  const renderer =
+    new THREE.WebGLRenderer({
+      antialias: true,
+      alpha: true
+    });
+
+
+  renderer.setPixelRatio(
+    Math.min(
+      window.devicePixelRatio,
+      2
+    )
+  );
+
+
+  renderer.setSize(
+    container.clientWidth,
+    container.clientHeight
+  );
+
+
+  renderer.outputColorSpace =
+    THREE.SRGBColorSpace;
+
+
+  renderer.shadowMap.enabled =
+    true;
+
+
+  renderer.shadowMap.type =
+    THREE.PCFSoftShadowMap;
+
+
+  container.appendChild(
+    renderer.domElement
+  );
+
+
+  const ambientLight =
+    new THREE.AmbientLight(
+      0xffffff,
+      1.5
     );
 
 
-    renderer.outputColorSpace =
-      THREE.SRGBColorSpace;
+  scene.add(
+    ambientLight
+  );
 
 
-    renderer.shadowMap.enabled =
+  const keyLight =
+    new THREE.DirectionalLight(
+      0xffffff,
+      4.0
+    );
+
+
+  keyLight.position.set(
+    4,
+    6,
+    5
+  );
+
+
+  keyLight.castShadow =
+    true;
+
+
+  scene.add(
+    keyLight
+  );
+
+
+  const cyanLight =
+    new THREE.PointLight(
+      0x55ddff,
+      22,
+      12
+    );
+
+
+  cyanLight.position.set(
+    -3,
+    2.3,
+    3
+  );
+
+
+  scene.add(
+    cyanLight
+  );
+
+
+  const violetLight =
+    new THREE.PointLight(
+      0x826cff,
+      17,
+      12
+    );
+
+
+  violetLight.position.set(
+    3,
+    1.5,
+    -2
+  );
+
+
+  scene.add(
+    violetLight
+  );
+
+
+  const floorGeometry =
+    new THREE.CircleGeometry(
+      3.3,
+      80
+    );
+
+
+  const floorMaterial =
+    new THREE.MeshStandardMaterial({
+      color: 0x07101a,
+      roughness: 0.65,
+      metalness: 0.2,
+      transparent: true,
+      opacity: 0.72
+    });
+
+
+  const floor =
+    new THREE.Mesh(
+      floorGeometry,
+      floorMaterial
+    );
+
+
+  floor.rotation.x =
+    -Math.PI / 2;
+
+
+  floor.position.y =
+    -1.42;
+
+
+  floor.receiveShadow =
+    true;
+
+
+  scene.add(
+    floor
+  );
+
+
+  const grid =
+    new THREE.GridHelper(
+      7,
+      22,
+      0x52dfff,
+      0x182638
+    );
+
+
+  grid.position.y =
+    -1.40;
+
+
+  grid.material.transparent =
+    true;
+
+
+  grid.material.opacity =
+    0.22;
+
+
+  scene.add(
+    grid
+  );
+
+
+  const robot =
+    new THREE.Group();
+
+
+  scene.add(
+    robot
+  );
+
+
+  const darkMaterial =
+    new THREE.MeshStandardMaterial({
+      color: 0x161d27,
+      metalness: 0.78,
+      roughness: 0.28
+    });
+
+
+  const darkMaterialTwo =
+    new THREE.MeshStandardMaterial({
+      color: 0x232c39,
+      metalness: 0.68,
+      roughness: 0.3
+    });
+
+
+  const jointMaterial =
+    new THREE.MeshStandardMaterial({
+      color: 0x61e4ff,
+      emissive: 0x123844,
+      emissiveIntensity: 0.7,
+      metalness: 0.5,
+      roughness: 0.22
+    });
+
+
+  const accentMaterial =
+    new THREE.MeshStandardMaterial({
+      color: 0x9a87ff,
+      emissive: 0x251d55,
+      emissiveIntensity: 0.7,
+      metalness: 0.45,
+      roughness: 0.25
+    });
+
+
+  function addJoint(
+    x,
+    y,
+    z,
+    radius = 0.28,
+    material = jointMaterial
+  ) {
+
+    const joint =
+      new THREE.Mesh(
+        new THREE.SphereGeometry(
+          radius,
+          32,
+          32
+        ),
+        material
+      );
+
+
+    joint.position.set(
+      x,
+      y,
+      z
+    );
+
+
+    joint.castShadow =
       true;
 
 
-    renderer.shadowMap.type =
-      THREE.PCFSoftShadowMap;
+    robot.add(
+      joint
+    );
 
 
-    container.appendChild(
+    return joint;
+  }
+
+
+  function addLink(
+    start,
+    end,
+    radius,
+    material
+  ) {
+
+    const direction =
+      new THREE.Vector3()
+        .subVectors(
+          end,
+          start
+        );
+
+
+    const length =
+      direction.length();
+
+
+    const geometry =
+      new THREE.CylinderGeometry(
+        radius,
+        radius * 1.02,
+        length,
+        28
+      );
+
+
+    const link =
+      new THREE.Mesh(
+        geometry,
+        material
+      );
+
+
+    const midpoint =
+      new THREE.Vector3()
+        .addVectors(
+          start,
+          end
+        )
+        .multiplyScalar(
+          0.5
+        );
+
+
+    link.position.copy(
+      midpoint
+    );
+
+
+    const quaternion =
+      new THREE.Quaternion();
+
+
+    quaternion.setFromUnitVectors(
+      new THREE.Vector3(
+        0,
+        1,
+        0
+      ),
+      direction
+        .clone()
+        .normalize()
+    );
+
+
+    link.quaternion.copy(
+      quaternion
+    );
+
+
+    link.castShadow =
+      true;
+
+
+    robot.add(
+      link
+    );
+
+
+    return link;
+  }
+
+
+  const base =
+    new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        0.68,
+        0.82,
+        0.43,
+        64
+      ),
+      darkMaterial
+    );
+
+
+  base.position.set(
+    0,
+    -1.18,
+    0
+  );
+
+
+  base.castShadow =
+    true;
+
+
+  robot.add(
+    base
+  );
+
+
+  const baseRing =
+    new THREE.Mesh(
+      new THREE.TorusGeometry(
+        0.66,
+        0.025,
+        12,
+        90
+      ),
+      jointMaterial
+    );
+
+
+  baseRing.rotation.x =
+    Math.PI / 2;
+
+
+  baseRing.position.y =
+    -0.96;
+
+
+  robot.add(
+    baseRing
+  );
+
+
+  const p0 =
+    new THREE.Vector3(
+      0,
+      -0.92,
+      0
+    );
+
+
+  const p1 =
+    new THREE.Vector3(
+      -0.1,
+      -0.20,
+      0.05
+    );
+
+
+  const p2 =
+    new THREE.Vector3(
+      0.22,
+      0.56,
+      0
+    );
+
+
+  const p3 =
+    new THREE.Vector3(
+      0.82,
+      1.05,
+      -0.05
+    );
+
+
+  const p4 =
+    new THREE.Vector3(
+      1.38,
+      1.35,
+      0
+    );
+
+
+  const p5 =
+    new THREE.Vector3(
+      1.68,
+      1.17,
+      0.02
+    );
+
+
+  addLink(
+    p0,
+    p1,
+    0.20,
+    darkMaterial
+  );
+
+
+  addLink(
+    p1,
+    p2,
+    0.18,
+    darkMaterialTwo
+  );
+
+
+  addLink(
+    p2,
+    p3,
+    0.17,
+    darkMaterial
+  );
+
+
+  addLink(
+    p3,
+    p4,
+    0.145,
+    darkMaterialTwo
+  );
+
+
+  addLink(
+    p4,
+    p5,
+    0.11,
+    darkMaterial
+  );
+
+
+  addJoint(
+    p0.x,
+    p0.y,
+    p0.z,
+    0.27
+  );
+
+
+  addJoint(
+    p1.x,
+    p1.y,
+    p1.z,
+    0.25
+  );
+
+
+  addJoint(
+    p2.x,
+    p2.y,
+    p2.z,
+    0.24,
+    accentMaterial
+  );
+
+
+  addJoint(
+    p3.x,
+    p3.y,
+    p3.z,
+    0.22
+  );
+
+
+  addJoint(
+    p4.x,
+    p4.y,
+    p4.z,
+    0.18,
+    accentMaterial
+  );
+
+
+  const wrist =
+    new THREE.Mesh(
+      new THREE.CylinderGeometry(
+        0.16,
+        0.16,
+        0.42,
+        32
+      ),
+      darkMaterial
+    );
+
+
+  wrist.position.set(
+    1.82,
+    1.12,
+    0.02
+  );
+
+
+  wrist.rotation.z =
+    Math.PI / 2;
+
+
+  wrist.castShadow =
+    true;
+
+
+  robot.add(
+    wrist
+  );
+
+
+  const palm =
+    new THREE.Mesh(
+      new THREE.BoxGeometry(
+        0.25,
+        0.26,
+        0.32
+      ),
+      darkMaterialTwo
+    );
+
+
+  palm.position.set(
+    2.03,
+    1.12,
+    0.02
+  );
+
+
+  palm.castShadow =
+    true;
+
+
+  robot.add(
+    palm
+  );
+
+
+  const fingerGeometry =
+    new THREE.BoxGeometry(
+      0.32,
+      0.09,
+      0.09
+    );
+
+
+  const fingerOne =
+    new THREE.Mesh(
+      fingerGeometry,
+      darkMaterial
+    );
+
+
+  fingerOne.position.set(
+    2.28,
+    1.22,
+    0.02
+  );
+
+
+  fingerOne.castShadow =
+    true;
+
+
+  robot.add(
+    fingerOne
+  );
+
+
+  const fingerTwo =
+    new THREE.Mesh(
+      fingerGeometry,
+      darkMaterial
+    );
+
+
+  fingerTwo.position.set(
+    2.28,
+    1.02,
+    0.02
+  );
+
+
+  fingerTwo.castShadow =
+    true;
+
+
+  robot.add(
+    fingerTwo
+  );
+
+
+  robot.rotation.y =
+    -0.55;
+
+
+  robot.position.set(
+    -0.2,
+    0,
+    0
+  );
+
+
+  const ringOne =
+    new THREE.Mesh(
+      new THREE.TorusGeometry(
+        2.25,
+        0.009,
+        10,
+        150
+      ),
+      new THREE.MeshBasicMaterial({
+        color: 0x4bddff,
+        transparent: true,
+        opacity: 0.28
+      })
+    );
+
+
+  ringOne.rotation.x =
+    Math.PI / 2.45;
+
+
+  scene.add(
+    ringOne
+  );
+
+
+  const ringTwo =
+    new THREE.Mesh(
+      new THREE.TorusGeometry(
+        1.8,
+        0.006,
+        8,
+        120
+      ),
+      new THREE.MeshBasicMaterial({
+        color: 0x9b84ff,
+        transparent: true,
+        opacity: 0.2
+      })
+    );
+
+
+  ringTwo.rotation.x =
+    Math.PI / 1.8;
+
+
+  ringTwo.rotation.z =
+    0.65;
+
+
+  scene.add(
+    ringTwo
+  );
+
+
+  const particleGeometry =
+    new THREE.BufferGeometry();
+
+
+  const particleCount =
+    220;
+
+
+  const positions =
+    new Float32Array(
+      particleCount * 3
+    );
+
+
+  for (
+    let i = 0;
+    i < particleCount;
+    i++
+  ) {
+
+    positions[i * 3] =
+      (Math.random() - 0.5)
+      * 7.5;
+
+
+    positions[i * 3 + 1] =
+      (Math.random() - 0.5)
+      * 5.5;
+
+
+    positions[i * 3 + 2] =
+      (Math.random() - 0.5)
+      * 6.5;
+
+  }
+
+
+  particleGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(
+      positions,
+      3
+    )
+  );
+
+
+  const particleMaterial =
+    new THREE.PointsMaterial({
+      color: 0x6ce6ff,
+      size: 0.018,
+      transparent: true,
+      opacity: 0.42
+    });
+
+
+  const particles =
+    new THREE.Points(
+      particleGeometry,
+      particleMaterial
+    );
+
+
+  scene.add(
+    particles
+  );
+
+
+  const dataPointGroup =
+    new THREE.Group();
+
+
+  scene.add(
+    dataPointGroup
+  );
+
+
+  const dataMaterial =
+    new THREE.MeshBasicMaterial({
+      color: 0x7be9ff
+    });
+
+
+  for (
+    let i = 0;
+    i < 18;
+    i++
+  ) {
+
+    const point =
+      new THREE.Mesh(
+        new THREE.SphereGeometry(
+          0.025,
+          12,
+          12
+        ),
+        dataMaterial
+      );
+
+
+    const angle =
+      Math.random()
+      * Math.PI
+      * 2;
+
+
+    const radius =
+      1.8
+      + Math.random()
+      * 1.4;
+
+
+    point.position.set(
+      Math.cos(angle) * radius,
+      -0.2 + Math.random() * 2.8,
+      Math.sin(angle) * radius
+    );
+
+
+    dataPointGroup.add(
+      point
+    );
+
+  }
+
+
+  const controls =
+    new OrbitControls(
+      camera,
       renderer.domElement
     );
 
 
-    /* -----------------------------------------------
-       LIGHTING
-    ------------------------------------------------ */
-
-    const ambientLight =
-      new THREE.AmbientLight(
-        0xffffff,
-        1.5
-      );
+  controls.enableDamping =
+    true;
 
 
-    scene.add(
-      ambientLight
+  controls.dampingFactor =
+    0.055;
+
+
+  controls.enablePan =
+    false;
+
+
+  controls.minDistance =
+    4.2;
+
+
+  controls.maxDistance =
+    8.8;
+
+
+  controls.target.set(
+    0.35,
+    0.15,
+    0
+  );
+
+
+  controls.autoRotate =
+    false;
+
+
+  let userInteracting =
+    false;
+
+
+  renderer.domElement
+    .addEventListener(
+      "pointerdown",
+      () => {
+
+        userInteracting =
+          true;
+
+      }
     );
 
 
-    const keyLight =
-      new THREE.DirectionalLight(
-        0xffffff,
-        4.0
-      );
+  renderer.domElement
+    .addEventListener(
+      "pointerup",
+      () => {
 
+        setTimeout(
+          () => {
 
-    keyLight.position.set(
-      4,
-      6,
-      5
-    );
+            userInteracting =
+              false;
 
-
-    keyLight.castShadow =
-      true;
-
-
-    scene.add(
-      keyLight
-    );
-
-
-    const cyanLight =
-      new THREE.PointLight(
-        0x55ddff,
-        22,
-        12
-      );
-
-
-    cyanLight.position.set(
-      -3,
-      2.3,
-      3
-    );
-
-
-    scene.add(
-      cyanLight
-    );
-
-
-    const violetLight =
-      new THREE.PointLight(
-        0x826cff,
-        17,
-        12
-      );
-
-
-    violetLight.position.set(
-      3,
-      1.5,
-      -2
-    );
-
-
-    scene.add(
-      violetLight
-    );
-
-
-    /* -----------------------------------------------
-       FLOOR
-    ------------------------------------------------ */
-
-    const floorGeometry =
-      new THREE.CircleGeometry(
-        3.3,
-        80
-      );
-
-
-    const floorMaterial =
-      new THREE.MeshStandardMaterial({
-        color: 0x07101a,
-        roughness: 0.65,
-        metalness: 0.2,
-        transparent: true,
-        opacity: 0.72
-      });
-
-
-    const floor =
-      new THREE.Mesh(
-        floorGeometry,
-        floorMaterial
-      );
-
-
-    floor.rotation.x =
-      -Math.PI / 2;
-
-
-    floor.position.y =
-      -1.42;
-
-
-    floor.receiveShadow =
-      true;
-
-
-    scene.add(
-      floor
-    );
-
-
-    /* -----------------------------------------------
-       GRID
-    ------------------------------------------------ */
-
-    const grid =
-      new THREE.GridHelper(
-        7,
-        22,
-        0x52dfff,
-        0x182638
-      );
-
-
-    grid.position.y =
-      -1.40;
-
-
-    grid.material.transparent =
-      true;
-
-
-    grid.material.opacity =
-      0.22;
-
-
-    scene.add(
-      grid
-    );
-
-
-    /* ================================================
-       ROBOT
-    ================================================= */
-
-    const robot =
-      new THREE.Group();
-
-
-    scene.add(
-      robot
-    );
-
-
-    /* -----------------------------------------------
-       MATERIALS
-    ------------------------------------------------ */
-
-    const darkMaterial =
-      new THREE.MeshStandardMaterial({
-        color: 0x161d27,
-        metalness: 0.78,
-        roughness: 0.28
-      });
-
-
-    const darkMaterialTwo =
-      new THREE.MeshStandardMaterial({
-        color: 0x232c39,
-        metalness: 0.68,
-        roughness: 0.3
-      });
-
-
-    const jointMaterial =
-      new THREE.MeshStandardMaterial({
-        color: 0x61e4ff,
-        emissive: 0x123844,
-        emissiveIntensity: 0.7,
-        metalness: 0.5,
-        roughness: 0.22
-      });
-
-
-    const accentMaterial =
-      new THREE.MeshStandardMaterial({
-        color: 0x9a87ff,
-        emissive: 0x251d55,
-        emissiveIntensity: 0.7,
-        metalness: 0.45,
-        roughness: 0.25
-      });
-
-
-    /* -----------------------------------------------
-       HELPER FUNCTIONS
-    ------------------------------------------------ */
-
-    function addJoint(
-      x,
-      y,
-      z,
-      radius = 0.28,
-      material = jointMaterial
-    ) {
-
-      const joint =
-        new THREE.Mesh(
-          new THREE.SphereGeometry(
-            radius,
-            32,
-            32
-          ),
-          material
+          },
+          2500
         );
 
-
-      joint.position.set(
-        x,
-        y,
-        z
-      );
+      }
+    );
 
 
-      joint.castShadow =
-        true;
+  const clock =
+    new THREE.Clock();
 
 
-      robot.add(
-        joint
-      );
+  function animate() {
+
+    requestAnimationFrame(
+      animate
+    );
 
 
-      return joint;
+    const time =
+      clock.getElapsedTime();
+
+
+    if (!userInteracting) {
+
+      robot.rotation.y =
+        -0.55
+        +
+        Math.sin(
+          time * 0.32
+        )
+        * 0.12;
 
     }
 
 
-    function addLink(
-      start,
-      end,
-      radius,
-      material
-    ) {
-
-      const direction =
-        new THREE.Vector3()
-          .subVectors(
-            end,
-            start
-          );
-
-
-      const length =
-        direction.length();
-
-
-      const geometry =
-        new THREE.CylinderGeometry(
-          radius,
-          radius * 1.02,
-          length,
-          28
-        );
-
-
-      const link =
-        new THREE.Mesh(
-          geometry,
-          material
-        );
-
-
-      const midpoint =
-        new THREE.Vector3()
-          .addVectors(
-            start,
-            end
-          )
-          .multiplyScalar(
-            0.5
-          );
-
-
-      link.position.copy(
-        midpoint
-      );
-
-
-      const quaternion =
-        new THREE.Quaternion();
-
-
-      quaternion.setFromUnitVectors(
-        new THREE.Vector3(
-          0,
-          1,
-          0
-        ),
-        direction
-          .clone()
-          .normalize()
-      );
-
-
-      link.quaternion.copy(
-        quaternion
-      );
-
-
-      link.castShadow =
-        true;
-
-
-      robot.add(
-        link
-      );
-
-
-      return link;
-
-    }
-
-
-    /* -----------------------------------------------
-       BASE
-    ------------------------------------------------ */
-
-    const base =
-      new THREE.Mesh(
-        new THREE.CylinderGeometry(
-          0.68,
-          0.82,
-          0.43,
-          64
-        ),
-        darkMaterial
-      );
-
-
-    base.position.set(
-      0,
-      -1.18,
-      0
-    );
-
-
-    base.castShadow =
-      true;
-
-
-    robot.add(
-      base
-    );
-
-
-    const baseRing =
-      new THREE.Mesh(
-        new THREE.TorusGeometry(
-          0.66,
-          0.025,
-          12,
-          90
-        ),
-        jointMaterial
-      );
-
-
-    baseRing.rotation.x =
-      Math.PI / 2;
-
-
-    baseRing.position.y =
-      -0.96;
-
-
-    robot.add(
-      baseRing
-    );
-
-
-    /* -----------------------------------------------
-       ROBOT JOINT POSITIONS
-    ------------------------------------------------ */
-
-    const p0 =
-      new THREE.Vector3(
-        0,
-        -0.92,
-        0
-      );
-
-
-    const p1 =
-      new THREE.Vector3(
-        -0.1,
-        -0.20,
-        0.05
-      );
-
-
-    const p2 =
-      new THREE.Vector3(
-        0.22,
-        0.56,
-        0
-      );
-
-
-    const p3 =
-      new THREE.Vector3(
-        0.82,
-        1.05,
-        -0.05
-      );
-
-
-    const p4 =
-      new THREE.Vector3(
-        1.38,
-        1.35,
-        0
-      );
-
-
-    const p5 =
-      new THREE.Vector3(
-        1.68,
-        1.17,
-        0.02
-      );
-
-
-    /* -----------------------------------------------
-       LINKS
-    ------------------------------------------------ */
-
-    addLink(
-      p0,
-      p1,
-      0.20,
-      darkMaterial
-    );
-
-
-    addLink(
-      p1,
-      p2,
-      0.18,
-      darkMaterialTwo
-    );
-
-
-    addLink(
-      p2,
-      p3,
-      0.17,
-      darkMaterial
-    );
-
-
-    addLink(
-      p3,
-      p4,
-      0.145,
-      darkMaterialTwo
-    );
-
-
-    addLink(
-      p4,
-      p5,
-      0.11,
-      darkMaterial
-    );
-
-
-    /* -----------------------------------------------
-       JOINTS
-    ------------------------------------------------ */
-
-    addJoint(
-      p0.x,
-      p0.y,
-      p0.z,
-      0.27
-    );
-
-
-    addJoint(
-      p1.x,
-      p1.y,
-      p1.z,
-      0.25
-    );
-
-
-    addJoint(
-      p2.x,
-      p2.y,
-      p2.z,
-      0.24,
-      accentMaterial
-    );
-
-
-    addJoint(
-      p3.x,
-      p3.y,
-      p3.z,
-      0.22
-    );
-
-
-    addJoint(
-      p4.x,
-      p4.y,
-      p4.z,
-      0.18,
-      accentMaterial
-    );
-
-
-    /* -----------------------------------------------
-       END EFFECTOR
-    ------------------------------------------------ */
-
-    const wrist =
-      new THREE.Mesh(
-        new THREE.CylinderGeometry(
-          0.16,
-          0.16,
-          0.42,
-          32
-        ),
-        darkMaterial
-      );
-
-
-    wrist.position.set(
-      1.82,
-      1.12,
-      0.02
-    );
-
-
-    wrist.rotation.z =
-      Math.PI / 2;
-
-
-    wrist.castShadow =
-      true;
-
-
-    robot.add(
-      wrist
-    );
-
-
-    const palm =
-      new THREE.Mesh(
-        new THREE.BoxGeometry(
-          0.25,
-          0.26,
-          0.32
-        ),
-        darkMaterialTwo
-      );
-
-
-    palm.position.set(
-      2.03,
-      1.12,
-      0.02
-    );
-
-
-    palm.castShadow =
-      true;
-
-
-    robot.add(
-      palm
-    );
-
-
-    const fingerGeometry =
-      new THREE.BoxGeometry(
-        0.32,
-        0.09,
-        0.09
-      );
-
-
-    const fingerOne =
-      new THREE.Mesh(
-        fingerGeometry,
-        darkMaterial
-      );
-
-
-    fingerOne.position.set(
-      2.28,
-      1.22,
-      0.02
-    );
-
-
-    fingerOne.castShadow =
-      true;
-
-
-    robot.add(
-      fingerOne
-    );
-
-
-    const fingerTwo =
-      new THREE.Mesh(
-        fingerGeometry,
-        darkMaterial
-      );
-
-
-    fingerTwo.position.set(
-      2.28,
-      1.02,
-      0.02
-    );
-
-
-    fingerTwo.castShadow =
-      true;
-
-
-    robot.add(
-      fingerTwo
-    );
-
-
-    robot.rotation.y =
-      -0.55;
-
-
-    robot.position.set(
-      -0.2,
-      0,
-      0
-    );
-
-
-    /* ================================================
-       DIGITAL TWIN RINGS
-    ================================================= */
-
-    const ringOne =
-      new THREE.Mesh(
-        new THREE.TorusGeometry(
-          2.25,
-          0.009,
-          10,
-          150
-        ),
-        new THREE.MeshBasicMaterial({
-          color: 0x4bddff,
-          transparent: true,
-          opacity: 0.28
-        })
-      );
-
-
-    ringOne.rotation.x =
-      Math.PI / 2.45;
-
-
-    scene.add(
-      ringOne
-    );
-
-
-    const ringTwo =
-      new THREE.Mesh(
-        new THREE.TorusGeometry(
-          1.8,
-          0.006,
-          8,
-          120
-        ),
-        new THREE.MeshBasicMaterial({
-          color: 0x9b84ff,
-          transparent: true,
-          opacity: 0.2
-        })
-      );
-
-
-    ringTwo.rotation.x =
-      Math.PI / 1.8;
+    jointMaterial.emissiveIntensity =
+      0.63
+      +
+      Math.sin(
+        time * 2.1
+      )
+      * 0.16;
+
+
+    accentMaterial.emissiveIntensity =
+      0.58
+      +
+      Math.sin(
+        time * 1.7
+      )
+      * 0.14;
+
+
+    ringOne.rotation.z =
+      time * 0.10;
 
 
     ringTwo.rotation.z =
-      0.65;
+      0.65
+      -
+      time * 0.075;
 
 
-    scene.add(
-      ringTwo
-    );
+    particles.rotation.y =
+      time * 0.012;
 
 
-    /* ================================================
-       PARTICLE CLOUD
-    ================================================= */
-
-    const particleGeometry =
-      new THREE.BufferGeometry();
-
-
-    const particleCount =
-      220;
-
-
-    const positions =
-      new Float32Array(
-        particleCount * 3
-      );
-
-
-    for (
-      let i = 0;
-      i < particleCount;
-      i++
-    ) {
-
-      positions[
-        i * 3
-      ] =
-        (Math.random() - 0.5)
-        * 7.5;
-
-
-      positions[
-        i * 3 + 1
-      ] =
-        (Math.random() - 0.5)
-        * 5.5;
-
-
-      positions[
-        i * 3 + 2
-      ] =
-        (Math.random() - 0.5)
-        * 6.5;
-
-    }
-
-
-    particleGeometry.setAttribute(
-      "position",
-      new THREE.BufferAttribute(
-        positions,
-        3
+    particles.rotation.x =
+      Math.sin(
+        time * 0.08
       )
-    );
+      * 0.03;
 
 
-    const particleMaterial =
-      new THREE.PointsMaterial({
-        color: 0x6ce6ff,
-        size: 0.018,
-        transparent: true,
-        opacity: 0.42
-      });
+    dataPointGroup.rotation.y =
+      -time * 0.035;
 
 
-    const particles =
-      new THREE.Points(
-        particleGeometry,
-        particleMaterial
-      );
+    robot.position.y =
+      Math.sin(
+        time * 1.1
+      )
+      * 0.025;
 
 
-    scene.add(
-      particles
-    );
+    controls.update();
 
 
-    /* ================================================
-       FLOATING DATA POINTS
-    ================================================= */
-
-    const dataPointGroup =
-      new THREE.Group();
-
-
-    scene.add(
-      dataPointGroup
-    );
-
-
-    const dataMaterial =
-      new THREE.MeshBasicMaterial({
-        color: 0x7be9ff
-      });
-
-
-    for (
-      let i = 0;
-      i < 18;
-      i++
-    ) {
-
-      const point =
-        new THREE.Mesh(
-          new THREE.SphereGeometry(
-            0.025,
-            12,
-            12
-          ),
-          dataMaterial
-        );
-
-
-      const angle =
-        Math.random()
-        * Math.PI
-        * 2;
-
-
-      const radius =
-        1.8
-        + Math.random()
-        * 1.4;
-
-
-      point.position.set(
-        Math.cos(angle)
-        * radius,
-
-        -0.2
-        + Math.random()
-        * 2.8,
-
-        Math.sin(angle)
-        * radius
-      );
-
-
-      dataPointGroup.add(
-        point
-      );
-
-    }
-
-
-    /* ================================================
-       CONTROLS
-    ================================================= */
-
-    const controls =
-      new OrbitControls(
-        camera,
-        renderer.domElement
-      );
-
-
-    controls.enableDamping =
-      true;
-
-
-    controls.dampingFactor =
-      0.055;
-
-
-    controls.enablePan =
-      false;
-
-
-    controls.minDistance =
-      4.2;
-
-
-    controls.maxDistance =
-      8.8;
-
-
-    controls.target.set(
-      0.35,
-      0.15,
-      0
-    );
-
-
-    controls.autoRotate =
-      false;
-
-
-    /* ================================================
-       USER INTERACTION
-    ================================================= */
-
-    let userInteracting =
-      false;
-
-
-    renderer.domElement
-      .addEventListener(
-        "pointerdown",
-        () => {
-
-          userInteracting =
-            true;
-
-        }
-      );
-
-
-    renderer.domElement
-      .addEventListener(
-        "pointerup",
-        () => {
-
-          setTimeout(
-            () => {
-
-              userInteracting =
-                false;
-
-            },
-            2500
-          );
-
-        }
-      );
-
-
-    /* ================================================
-       ANIMATION
-    ================================================= */
-
-    const clock =
-      new THREE.Clock();
-
-
-    function animate() {
-
-      requestAnimationFrame(
-        animate
-      );
-
-
-      const time =
-        clock.getElapsedTime();
-
-
-      /* subtle idle rotation */
-
-      if (!userInteracting) {
-
-        robot.rotation.y =
-          -0.55
-          +
-          Math.sin(
-            time * 0.32
-          )
-          * 0.12;
-
-      }
-
-
-      /* pulsing joints */
-
-      jointMaterial
-        .emissiveIntensity =
-          0.63
-          +
-          Math.sin(
-            time * 2.1
-          )
-          * 0.16;
-
-
-      accentMaterial
-        .emissiveIntensity =
-          0.58
-          +
-          Math.sin(
-            time * 1.7
-          )
-          * 0.14;
-
-
-      /* ring movement */
-
-      ringOne.rotation.z =
-        time * 0.10;
-
-
-      ringTwo.rotation.z =
-        0.65
-        -
-        time * 0.075;
-
-
-      /* particle drift */
-
-      particles.rotation.y =
-        time * 0.012;
-
-
-      particles.rotation.x =
-        Math.sin(
-          time * 0.08
-        )
-        * 0.03;
-
-
-      dataPointGroup.rotation.y =
-        -time * 0.035;
-
-
-      /* tiny floating motion */
-
-      robot.position.y =
-        Math.sin(
-          time * 1.1
-        )
-        * 0.025;
-
-
-      controls.update();
-
-
-      renderer.render(
-        scene,
-        camera
-      );
-
-    }
-
-
-    animate();
-
-
-    /* ================================================
-       RESPONSIVE VIEWER
-    ================================================= */
-
-    function resizeRenderer() {
-
-      const width =
-        container.clientWidth;
-
-
-      const height =
-        container.clientHeight;
-
-
-      if (
-        width === 0 ||
-        height === 0
-      ) {
-
-        return;
-
-      }
-
-
-      camera.aspect =
-        width / height;
-
-
+    renderer.render(
+      scene,
       camera
-        .updateProjectionMatrix();
+    );
+
+  }
 
 
-      renderer.setSize(
-        width,
-        height
-      );
+  animate();
 
+
+  function resizeRenderer() {
+
+    const width =
+      container.clientWidth;
+
+
+    const height =
+      container.clientHeight;
+
+
+    if (
+      width === 0 ||
+      height === 0
+    ) {
+      return;
     }
 
 
-    window.addEventListener(
-      "resize",
+    camera.aspect =
+      width / height;
+
+
+    camera.updateProjectionMatrix();
+
+
+    renderer.setSize(
+      width,
+      height
+    );
+
+  }
+
+
+  window.addEventListener(
+    "resize",
+    resizeRenderer
+  );
+
+
+  const resizeObserver =
+    new ResizeObserver(
       resizeRenderer
     );
 
 
-    const resizeObserver =
-      new ResizeObserver(
-        resizeRenderer
-      );
+  resizeObserver.observe(
+    container
+  );
 
-
-    resizeObserver.observe(
-      container
-    );
-
-  </script>
+</script>
 
 </body>
 </html>
