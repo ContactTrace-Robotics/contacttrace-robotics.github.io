@@ -4,61 +4,743 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ContactTrace Robotics</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, Arial, sans-serif;
+      background: #070b14;
+      color: #e8eef8;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 1000;
+      background: rgba(7, 11, 20, 0.78);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: 0.4px;
+    }
+
+    .logo span {
+      color: #5ee7ff;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95rem;
+      color: #b9c7da;
+    }
+
+    .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      padding: 110px 24px 60px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      border-radius: 50%;
+      background: rgba(44, 202, 255, 0.12);
+      filter: blur(120px);
+      top: -120px;
+      right: -150px;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: rgba(140, 92, 255, 0.10);
+      filter: blur(120px);
+      bottom: -160px;
+      left: -100px;
+    }
+
+    .hero-inner {
+      max-width: 1200px;
+      width: 100%;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 70px;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      padding: 8px 14px;
+      border: 1px solid rgba(94, 231, 255, 0.25);
+      background: rgba(94, 231, 255, 0.07);
+      color: #8defff;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 6vw, 5.8rem);
+      line-height: 0.98;
+      letter-spacing: -3px;
+      margin-bottom: 25px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, #ffffff, #61ddff, #9b8cff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      max-width: 720px;
+      font-size: 1.15rem;
+      color: #aab9ce;
+      margin-bottom: 34px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 13px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      color: #061018;
+      background: #66e5ff;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(102,229,255,0.23);
+    }
+
+    .btn-secondary {
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #eaf2ff;
+      background: rgba(255,255,255,0.03);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.07);
+      transform: translateY(-3px);
+    }
+
+    .robot-panel {
+      min-height: 430px;
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 24px;
+      background:
+        linear-gradient(rgba(255,255,255,0.02), rgba(255,255,255,0.02)),
+        radial-gradient(circle at center, rgba(70,210,255,0.10), transparent 60%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      box-shadow: inset 0 0 60px rgba(255,255,255,0.015);
+    }
+
+    .orbit {
+      width: 290px;
+      height: 290px;
+      border: 1px solid rgba(105,230,255,0.18);
+      border-radius: 50%;
+      position: absolute;
+      animation: rotate 12s linear infinite;
+    }
+
+    .orbit::before,
+    .orbit::after {
+      content: "";
+      position: absolute;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #64e7ff;
+      box-shadow: 0 0 20px #64e7ff;
+    }
+
+    .orbit::before {
+      top: 12px;
+      left: 60px;
+    }
+
+    .orbit::after {
+      bottom: 20px;
+      right: 48px;
+      background: #9e8cff;
+      box-shadow: 0 0 20px #9e8cff;
+    }
+
+    .center-core {
+      text-align: center;
+      z-index: 5;
+    }
+
+    .center-core .icon {
+      font-size: 5.5rem;
+      filter: drop-shadow(0 0 25px rgba(95,230,255,0.28));
+      animation: float 4s ease-in-out infinite;
+    }
+
+    .center-core p {
+      margin-top: 15px;
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: #8495aa;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    section {
+      padding: 100px 24px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-label {
+      color: #66e5ff;
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .section-intro {
+      color: #97a8bd;
+      max-width: 720px;
+      margin-bottom: 44px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      padding: 28px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.025);
+      transition: 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(97,221,255,0.30);
+      background: rgba(255,255,255,0.045);
+    }
+
+    .card .number {
+      font-size: 0.8rem;
+      color: #66e5ff;
+      margin-bottom: 22px;
+    }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #94a4b7;
+      font-size: 0.96rem;
+    }
+
+    .project-card {
+      min-height: 270px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 6px 10px;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      background: rgba(94,231,255,0.08);
+      color: #93edff;
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .metric {
+      text-align: center;
+      padding: 28px 15px;
+      border-top: 1px solid rgba(255,255,255,0.09);
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 2rem;
+      color: #f4f8ff;
+    }
+
+    .metric span {
+      color: #7f91a8;
+      font-size: 0.85rem;
+    }
+
+    .collaborate {
+      background: linear-gradient(
+        135deg,
+        rgba(55,190,255,0.08),
+        rgba(125,90,255,0.08)
+      );
+    }
+
+    .collab-box {
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 55px;
+      text-align: center;
+    }
+
+    .collab-box h2 {
+      font-size: 2.5rem;
+      margin-bottom: 16px;
+    }
+
+    .collab-box p {
+      color: #a0afc2;
+      max-width: 680px;
+      margin: 0 auto 28px;
+    }
+
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 35px 24px;
+      color: #78889b;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 900px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .robot-panel {
+        min-height: 330px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metrics {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      h1 {
+        letter-spacing: -2px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <h1>ContactTrace Robotics</h1>
 
-  <h2>Independent Robotics Research Platform</h2>
+<nav>
+  <div class="nav-container">
+    <div class="logo">ContactTrace <span>Robotics</span></div>
 
-  <p>
-    ContactTrace Robotics focuses on robot simulation, benchmarking,
-    policy evaluation, and sim-to-real validation.
-  </p>
+    <div class="nav-links">
+      <a href="#research">Research</a>
+      <a href="#projects">Projects</a>
+      <a href="#collaborate">Collaborate</a>
+      <a href="#about">About</a>
+    </div>
+  </div>
+</nav>
 
-  <h2>Research Areas</h2>
+<header class="hero">
+  <div class="hero-inner">
 
-  <ul>
-    <li>Robot Simulation</li>
-    <li>Simulation Benchmarking</li>
-    <li>Robot Policy Evaluation</li>
-    <li>Failure Analysis</li>
-    <li>Sim-to-Real Validation</li>
-    <li>Robot Manipulation</li>
-  </ul>
+    <div>
+      <div class="eyebrow">Independent Robotics Research Platform</div>
 
-  <h2>Projects</h2>
+      <h1>
+        Building robots that
+        <span class="gradient-text">fail better.</span>
+      </h1>
 
-  <h3>Robot Evaluation Platform</h3>
-  <p>
-    Automated evaluation infrastructure for testing robot policies,
-    identifying failure modes, and generating structured benchmark results.
-  </p>
+      <p>
+        ContactTrace Robotics develops simulation, benchmarking and
+        sim-to-real evaluation tools for understanding robot failures,
+        validating policies, and improving real-world deployment.
+      </p>
 
-  <h3>Real2Isaac</h3>
-  <p>
-    Pipeline for transforming real-world captured environments into
-    simulation-ready scenes for NVIDIA Isaac Sim.
-  </p>
+      <div class="buttons">
+        <a href="#projects" class="btn btn-primary">Explore Research</a>
+        <a href="#collaborate" class="btn btn-secondary">Collaborate With Us</a>
+      </div>
+    </div>
 
-  <h3>Failure-Aware Robotics Evaluation</h3>
-  <p>
-    Research on identifying robot-policy failures and generating targeted
-    scenarios for evaluation and improvement.
-  </p>
+    <div class="robot-panel">
+      <div class="orbit"></div>
 
-  <h2>Collaborate</h2>
+      <div class="center-core">
+        <div class="icon">🤖</div>
+        <p>SIMULATION → EVALUATION → REAL WORLD</p>
+      </div>
+    </div>
 
-  <p>
-    We welcome collaboration with students, researchers, and engineers
-    interested in robotics simulation, manipulation, benchmarking,
-    and sim-to-real research.
-  </p>
+  </div>
+</header>
 
-  <h2>Contact</h2>
 
-  <p>
-    GitHub: ContactTrace Robotics
-  </p>
+<section id="research">
+  <div class="container fade-up">
+
+    <div class="section-label">Research</div>
+    <h2 class="section-title">Research Areas</h2>
+
+    <p class="section-intro">
+      We focus on infrastructure and methods for evaluating robotic systems
+      before deploying them to real-world hardware.
+    </p>
+
+    <div class="grid">
+
+      <div class="card">
+        <div class="number">01</div>
+        <h3>Robot Simulation</h3>
+        <p>
+          Physics-based robot and environment simulation using modern
+          robotics simulation platforms.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="number">02</div>
+        <h3>Policy Evaluation</h3>
+        <p>
+          Automated testing of robotic policies across controlled,
+          reproducible scenarios.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="number">03</div>
+        <h3>Failure Analysis</h3>
+        <p>
+          Identifying why robotic systems fail and generating targeted
+          scenarios to expose weaknesses.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="number">04</div>
+        <h3>Sim-to-Real</h3>
+        <p>
+          Measuring and reducing differences between simulated behavior
+          and real robot performance.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="number">05</div>
+        <h3>Robot Manipulation</h3>
+        <p>
+          Evaluation and experimentation for grasping, manipulation,
+          control and interaction tasks.
+        </p>
+      </div>
+
+      <div class="card">
+        <div class="number">06</div>
+        <h3>Benchmarking</h3>
+        <p>
+          Reproducible experiments, metrics, automated testing and
+          structured benchmark reporting.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<section id="projects">
+  <div class="container fade-up">
+
+    <div class="section-label">Projects</div>
+    <h2 class="section-title">Featured Research</h2>
+
+    <p class="section-intro">
+      Experimental systems exploring simulation infrastructure,
+      robot-policy evaluation and real-to-simulation workflows.
+    </p>
+
+    <div class="grid">
+
+      <div class="card project-card">
+        <div>
+          <div class="number">PROJECT 01</div>
+          <h3>Robot Evaluation Platform</h3>
+
+          <p>
+            Automated infrastructure for testing robotic policies,
+            detecting regressions, classifying failures and generating
+            structured evaluation reports.
+          </p>
+        </div>
+
+        <div class="tags">
+          <span class="tag">MuJoCo</span>
+          <span class="tag">CI</span>
+          <span class="tag">Benchmarking</span>
+          <span class="tag">Policy Evaluation</span>
+        </div>
+      </div>
+
+
+      <div class="card project-card">
+        <div>
+          <div class="number">PROJECT 02</div>
+          <h3>Real2Isaac</h3>
+
+          <p>
+            Pipeline that transforms real-world captures into simulation-ready
+            environments with reconstruction, physics and robot integration.
+          </p>
+        </div>
+
+        <div class="tags">
+          <span class="tag">Isaac Sim</span>
+          <span class="tag">COLMAP</span>
+          <span class="tag">Gaussian Splatting</span>
+          <span class="tag">Simulation</span>
+        </div>
+      </div>
+
+
+      <div class="card project-card">
+        <div>
+          <div class="number">PROJECT 03</div>
+          <h3>Failure-Aware Evaluation</h3>
+
+          <p>
+            Research on automatically discovering robot-policy failure modes
+            and producing targeted scenarios for evaluation and improvement.
+          </p>
+        </div>
+
+        <div class="tags">
+          <span class="tag">Failure Analysis</span>
+          <span class="tag">Sim-to-Real</span>
+          <span class="tag">Manipulation</span>
+          <span class="tag">Robotics AI</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="metrics">
+      <div class="metric">
+        <strong>Isaac Sim</strong>
+        <span>Simulation</span>
+      </div>
+
+      <div class="metric">
+        <strong>MuJoCo</strong>
+        <span>Physics & Evaluation</span>
+      </div>
+
+      <div class="metric">
+        <strong>ROS 2</strong>
+        <span>Robot Integration</span>
+      </div>
+
+      <div class="metric">
+        <strong>Franka</strong>
+        <span>Manipulation</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<section class="collaborate" id="collaborate">
+  <div class="container fade-up">
+
+    <div class="collab-box">
+
+      <div class="section-label">Open Research</div>
+
+      <h2>Build robotics research with us.</h2>
+
+      <p>
+        ContactTrace Robotics welcomes students, researchers and engineers
+        interested in robotics simulation, manipulation, benchmarking,
+        policy evaluation and sim-to-real research.
+      </p>
+
+      <a
+        href="https://github.com/ContactTrace-Robotics"
+        class="btn btn-primary"
+        target="_blank">
+        View GitHub
+      </a>
+
+    </div>
+
+  </div>
+</section>
+
+
+<section id="about">
+  <div class="container fade-up">
+
+    <div class="section-label">About</div>
+
+    <h2 class="section-title">ContactTrace Robotics</h2>
+
+    <p class="section-intro">
+      An independent robotics research initiative exploring how simulation,
+      automated evaluation and real-world experimentation can make robotic
+      systems safer, more reliable and easier to deploy.
+    </p>
+
+  </div>
+</section>
+
+
+<footer>
+  <div class="footer-inner">
+
+    <div>
+      © 2026 ContactTrace Robotics
+    </div>
+
+    <div>
+      Robotics · Simulation · Evaluation · Sim-to-Real
+    </div>
+
+  </div>
+</footer>
+
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, {
+    threshold: 0.1
+  });
+
+  document.querySelectorAll(".fade-up").forEach(element => {
+    observer.observe(element);
+  });
+</script>
+
 </body>
 </html>
