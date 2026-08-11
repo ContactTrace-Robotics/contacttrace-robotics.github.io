@@ -127,9 +127,9 @@
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 30px;
+      gap: 23px;
 
-      font-size: 0.91rem;
+      font-size: 0.88rem;
       color: #b5c3d5;
     }
 
@@ -461,9 +461,7 @@
       border-radius: 50%;
 
       background: var(--green);
-
-      box-shadow:
-        0 0 10px var(--green);
+      box-shadow: 0 0 10px var(--green);
     }
 
     .viewer-state {
@@ -503,9 +501,7 @@
       color: rgba(215, 232, 255, 0.42);
 
       font-size: 0.7rem;
-
       white-space: nowrap;
-
       pointer-events: none;
     }
 
@@ -552,7 +548,6 @@
       font-weight: 800;
 
       letter-spacing: 2px;
-
       text-transform: uppercase;
 
       margin-bottom: 10px;
@@ -788,15 +783,12 @@
       grid-template-columns: repeat(4, 1fr);
 
       gap: 16px;
-
       margin-top: 30px;
     }
 
     .tech-item {
       padding: 28px 20px;
-
       text-align: center;
-
       border-top: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -811,6 +803,55 @@
     .tech-item span {
       color: #73869d;
       font-size: 0.77rem;
+    }
+
+    .platform-section {
+      background:
+        radial-gradient(
+          circle at 80% 30%,
+          rgba(102, 229, 255, 0.05),
+          transparent 32%
+        );
+    }
+
+    .platform-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 7px 11px;
+      margin-bottom: 24px;
+
+      border-radius: 999px;
+
+      border: 1px solid rgba(106, 255, 187, 0.16);
+      background: rgba(106, 255, 187, 0.045);
+
+      color: #99f6c9;
+
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.8px;
+    }
+
+    .research-apply {
+      margin-top: 35px;
+      padding: 28px;
+
+      border-radius: 18px;
+
+      border: 1px solid rgba(102, 229, 255, 0.12);
+      background: rgba(102, 229, 255, 0.025);
+    }
+
+    .research-apply h3 {
+      margin-bottom: 10px;
+    }
+
+    .research-apply p {
+      color: #91a3b8;
+      margin-bottom: 18px;
+      max-width: 780px;
     }
 
     .collaborate-section {
@@ -944,29 +985,30 @@
     }
 
     .founder-avatar {
-  width: 100px;
-  height: 100px;
+      width: 100px;
+      height: 100px;
 
-  border-radius: 22px;
-  overflow: hidden;
+      border-radius: 22px;
+      overflow: hidden;
 
-  border: 1px solid rgba(102, 229, 255, 0.2);
+      border: 1px solid rgba(102, 229, 255, 0.2);
 
-  position: relative;
-  z-index: 2;
+      position: relative;
+      z-index: 2;
 
-  box-shadow: 0 0 25px rgba(102, 229, 255, 0.08);
-}
+      box-shadow: 0 0 25px rgba(102, 229, 255, 0.08);
+    }
 
-.founder-avatar img {
-  width: 100%;
-  height: 100%;
+    .founder-avatar img {
+      width: 100%;
+      height: 100%;
 
-  object-fit: cover;
-  object-position: center;
+      object-fit: cover;
+      object-position: center;
 
-  display: block;
-}
+      display: block;
+    }
+
     .founder-content {
       position: relative;
       z-index: 2;
@@ -985,23 +1027,19 @@
 
     .founder-content p {
       max-width: 760px;
-
       color: #91a3b8;
-
       font-size: 0.92rem;
     }
 
     .founder-links {
       display: flex;
       gap: 18px;
-
       margin-top: 15px;
     }
 
     .founder-links a {
       color: #d9efff;
       font-size: 0.82rem;
-
       transition: 0.2s ease;
     }
 
@@ -1034,6 +1072,7 @@
     .footer-links {
       display: flex;
       gap: 18px;
+      flex-wrap: wrap;
     }
 
     .footer-links a:hover {
@@ -1042,7 +1081,6 @@
 
     .fade-up {
       opacity: 0;
-
       transform: translateY(28px);
 
       transition:
@@ -1053,6 +1091,13 @@
     .fade-up.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .nav-links {
+        gap: 14px;
+        font-size: 0.82rem;
+      }
     }
 
     @media (max-width: 980px) {
@@ -1086,11 +1131,13 @@
       }
     }
 
-    @media (max-width: 700px) {
+    @media (max-width: 850px) {
       .nav-links {
         display: none;
       }
+    }
 
+    @media (max-width: 700px) {
       h1 {
         letter-spacing: -2.5px;
       }
@@ -1148,10 +1195,30 @@
     </a>
 
     <div class="nav-links">
-      <a href="#research">Research</a>
-      <a href="#projects">Projects</a>
-      <a href="#collaborate">Collaborate</a>
-      <a href="#about">About</a>
+
+      <a href="#research">
+        Research
+      </a>
+
+      <a href="#projects">
+        Projects
+      </a>
+
+      <a href="#open-research">
+        Open Research
+      </a>
+
+      <a href="#platform">
+        Platform
+      </a>
+
+      <a href="#collaborate">
+        Collaborate
+      </a>
+
+      <a href="#about">
+        About
+      </a>
 
       <a
         class="nav-github"
@@ -1161,6 +1228,7 @@
       >
         GitHub ↗
       </a>
+
     </div>
 
   </div>
@@ -1200,13 +1268,13 @@
 
       <div class="buttons">
 
-        <a href="#projects" class="btn btn-primary">
-          Explore Research
+        <a href="#platform" class="btn btn-primary">
+          Explore Platform
           <span>→</span>
         </a>
 
-        <a href="#collaborate" class="btn btn-secondary">
-          Collaborate With Us
+        <a href="#open-research" class="btn btn-secondary">
+          Open Research
         </a>
 
       </div>
@@ -1215,7 +1283,7 @@
 
         <div class="hero-mini-stat">
           <strong>Simulation</strong>
-          <span>Isaac Sim · MuJoCo</span>
+          <span>Isaac Sim · MuJoCo · ROS 2</span>
         </div>
 
         <div class="hero-mini-stat">
@@ -1247,11 +1315,11 @@
       </div>
 
       <div class="simulation-route">
+        CAPTURE
+        <span>→</span>
         SIM
         <span>→</span>
-        BENCHMARK
-        <span>→</span>
-        VALIDATE
+        EVALUATE
         <span>→</span>
         REAL
       </div>
@@ -1604,6 +1672,519 @@
 </section>
 
 
+<section id="open-research">
+
+  <div class="container fade-up">
+
+    <div class="section-label">
+      Open Research
+    </div>
+
+    <h2 class="section-title">
+      Research opportunities
+    </h2>
+
+    <p class="section-intro">
+      ContactTrace Robotics welcomes students, researchers and
+      independent contributors interested in practical robotics
+      research with reproducible experiments and measurable outcomes.
+    </p>
+
+
+    <div class="grid">
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                TOPIC 01
+              </div>
+
+              <h3>
+                Failure-Aware Robot Policy Evaluation
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              OPEN
+            </div>
+
+          </div>
+
+          <p>
+            Investigate methods for automatically identifying
+            and classifying robot-policy failures including
+            missed grasps, dropped objects, collisions,
+            alignment errors and timeouts.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">MuJoCo</span>
+          <span class="tag">Isaac Sim</span>
+          <span class="tag">Evaluation</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                TOPIC 02
+              </div>
+
+              <h3>
+                Sim-to-Real Gap Measurement
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              OPEN
+            </div>
+
+          </div>
+
+          <p>
+            Compare simulated and physical robot behavior using
+            trajectory, timing, force, contact and task-performance
+            measurements to identify simulation fidelity gaps.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Franka</span>
+          <span class="tag">ROS 2</span>
+          <span class="tag">Simulation</span>
+          <span class="tag">Data Analysis</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                TOPIC 03
+              </div>
+
+              <h3>
+                Automatic Scenario Generation
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              OPEN
+            </div>
+
+          </div>
+
+          <p>
+            Generate targeted simulation scenarios by varying
+            object pose, friction, geometry, sensor conditions
+            and environment parameters to expose policy weaknesses.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Python</span>
+          <span class="tag">Benchmarking</span>
+          <span class="tag">Simulation</span>
+          <span class="tag">Robotics AI</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                TOPIC 04
+              </div>
+
+              <h3>
+                Robot Policy Regression Testing
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              OPEN
+            </div>
+
+          </div>
+
+          <p>
+            Develop CI-style robotics testing where candidate
+            controllers or policies are automatically compared
+            against a baseline using repeatable simulation trials.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">CI/CD</span>
+          <span class="tag">MuJoCo</span>
+          <span class="tag">Metrics</span>
+          <span class="tag">Automation</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                TOPIC 05
+              </div>
+
+              <h3>
+                Real-World-to-Simulation Automation
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              OPEN
+            </div>
+
+          </div>
+
+          <p>
+            Explore automated pipelines for converting phone
+            captures or real-world observations into robot-ready
+            simulation scenes with scale, collision geometry
+            and environment structure.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Computer Vision</span>
+          <span class="tag">3D Reconstruction</span>
+          <span class="tag">Isaac Sim</span>
+          <span class="tag">Real2Sim</span>
+        </div>
+
+      </div>
+
+
+      <div class="card project-card">
+
+        <div>
+
+          <div class="project-title-row">
+
+            <div>
+              <div class="card-number">
+                TOPIC 06
+              </div>
+
+              <h3>
+                Human-Guided Robot Policy Correction
+              </h3>
+            </div>
+
+            <div class="project-badge">
+              OPEN
+            </div>
+
+          </div>
+
+          <p>
+            Investigate whether human corrections to failed
+            robot trajectories can be transformed into useful
+            training or policy-improvement signals.
+          </p>
+
+        </div>
+
+        <div class="tags">
+          <span class="tag">Teleoperation</span>
+          <span class="tag">Manipulation</span>
+          <span class="tag">Learning</span>
+          <span class="tag">HRI</span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="research-apply">
+
+      <h3>
+        Interested in one of these topics?
+      </h3>
+
+      <p>
+        Students and researchers can apply for independent
+        research collaboration. Bachelor's and Master's thesis
+        collaborations may also be possible subject to approval
+        and academic supervision by the student's home university.
+      </p>
+
+      <a
+        href="mailto:contacttrace.robotics@gmail.com?subject=Research%20Collaboration%20Application"
+        class="btn btn-primary"
+      >
+        Apply for Research
+        <span>→</span>
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section id="platform" class="platform-section">
+
+  <div class="container fade-up">
+
+    <div class="section-label">
+      Platform Vision
+    </div>
+
+    <h2 class="section-title">
+      ContactTrace Sim
+    </h2>
+
+    <div class="platform-status">
+      <span class="status-dot"></span>
+      IN DEVELOPMENT
+    </div>
+
+    <p class="section-intro">
+      ContactTrace Sim is an emerging research platform concept
+      for connecting real-world scene capture, robot import,
+      simulation, automated policy evaluation and sim-to-real
+      validation through a common workflow.
+    </p>
+
+
+    <div class="pipeline">
+
+      <div class="pipeline-top">
+
+        <div>
+
+          <div class="section-label">
+            Platform Workflow
+          </div>
+
+          <h3>
+            Capture → Build → Evaluate → Validate
+          </h3>
+
+        </div>
+
+        <p>
+          The long-term goal is to make robotics simulation
+          easier to create, easier to measure and easier to
+          connect with physical deployment.
+        </p>
+
+      </div>
+
+
+      <div class="pipeline-row">
+
+        <div class="pipeline-item">
+          <strong>01 · Capture</strong>
+
+          <span>
+            Capture a workspace using phone video,
+            images or imported 3D assets.
+          </span>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-item">
+          <strong>02 · Build</strong>
+
+          <span>
+            Generate a simulation scene and add
+            robots through standard description formats.
+          </span>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-item">
+          <strong>03 · Evaluate</strong>
+
+          <span>
+            Execute policies repeatedly and measure
+            performance across controlled scenarios.
+          </span>
+        </div>
+
+        <div class="pipeline-arrow">→</div>
+
+        <div class="pipeline-item">
+          <strong>04 · Validate</strong>
+
+          <span>
+            Compare simulation results against
+            physical robot behavior.
+          </span>
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="grid" style="margin-top:30px;">
+
+      <div class="card">
+
+        <div class="card-number">
+          REAL2SIM
+        </div>
+
+        <h3>
+          Phone-to-Simulation
+        </h3>
+
+        <p>
+          Extend real-world reconstruction toward automated,
+          robot-ready scene generation from phone captures.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-number">
+          ROBOT IMPORT
+        </div>
+
+        <h3>
+          Bring Your Own Robot
+        </h3>
+
+        <p>
+          Designed to support robot-description formats such
+          as URDF with links, joints, meshes, limits and
+          collision models.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-number">
+          MULTI-BACKEND
+        </div>
+
+        <h3>
+          Simulator Independent
+        </h3>
+
+        <p>
+          Explore a common interface capable of targeting
+          multiple simulation backends such as MuJoCo,
+          Gazebo and Isaac Sim.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-number">
+          EVALUATION
+        </div>
+
+        <h3>
+          Automated Benchmarks
+        </h3>
+
+        <p>
+          Run batch experiments, compare candidate policies,
+          classify failures and generate structured
+          evaluation results.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-number">
+          ROS 2
+        </div>
+
+        <h3>
+          Simulation-to-Robot Bridge
+        </h3>
+
+        <p>
+          Use ROS 2 interfaces to connect simulated
+          environments and physical robots through
+          shared control workflows.
+        </p>
+
+      </div>
+
+
+      <div class="card">
+
+        <div class="card-number">
+          MOBILE
+        </div>
+
+        <h3>
+          Browser & Phone Control
+        </h3>
+
+        <p>
+          Explore mobile and browser interfaces for robot
+          teleoperation, demonstrations, scene interaction
+          and experiment control.
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
 <section id="collaborate" class="collaborate-section">
 
   <div class="container fade-up">
@@ -1611,7 +2192,7 @@
     <div class="collab-box">
 
       <div class="section-label">
-        Open Research
+        Collaborate
       </div>
 
       <h2>
@@ -1620,12 +2201,16 @@
 
       <p>
         ContactTrace Robotics welcomes students,
-        researchers and engineers interested in
-        robotics simulation, manipulation, policy evaluation,
-        benchmarking and sim-to-real experimentation.
+        researchers, engineers and potential industry
+        collaborators interested in simulation,
+        robot-policy evaluation, benchmarking,
+        real-world reconstruction and sim-to-real systems.
       </p>
 
-      <div class="buttons" style="justify-content:center;">
+      <div
+        class="buttons"
+        style="justify-content:center;"
+      >
 
         <a
           href="https://github.com/ContactTrace-Robotics"
@@ -1687,7 +2272,8 @@
 
         <p>
           The platform explores simulation infrastructure,
-          automated testing, failure-aware evaluation and
+          automated testing, failure-aware evaluation,
+          real-world-to-simulation workflows and
           sim-to-real validation for embodied robotic systems.
         </p>
 
@@ -1724,10 +2310,12 @@
     <div class="founder-card">
 
       <div class="founder-avatar">
+
         <img
           src="founder.jpg"
           alt="M A Hafiz"
         />
+
       </div>
 
       <div class="founder-content">
@@ -1795,6 +2383,14 @@
 
       <a href="#projects">
         Projects
+      </a>
+
+      <a href="#open-research">
+        Open Research
+      </a>
+
+      <a href="#platform">
+        Platform
       </a>
 
       <a
