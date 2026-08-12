@@ -4106,44 +4106,64 @@
 <script type="module">
 
   /* ============================================================
-     ContactTrace visitor counter
+     ContactTrace visitor counter — Cloudflare Worker + KV
      ============================================================ */
 
   const visitorCountElement =
     document.getElementById("visitor-count");
 
-  const visitStorageKey =
-    "contacttrace_last_counted_visit";
+  const COUNTER_API =
+    "https://contacttrace-visitor-counter.hafizsourav44.workers.dev";
 
-  const oneDayMs =
+  const VISIT_STORAGE_KEY =
+    "contacttrace_last_counted_visit_v2";
+
+  const LAST_COUNT_STORAGE_KEY =
+    "contacttrace_last_visitor_count";
+
+  const ONE_DAY_MS =
     24 * 60 * 60 * 1000;
 
-  const counterNamespace =
-    "contacttrace-robotics";
-
-  const counterName =
-    "website-visitors";
-
-  const counterBaseUrl =
-    `https://contacttrace-visitor-counter.hafizsourav44.workers.dev`;
-
   function displayVisitorCount(value) {
-    const numericValue = Number(value);
+
+    const numericValue =
+      Number(value);
+
     const safeValue =
-      Number.isFinite(numericValue)
+      Number.isFinite(numericValue) &&
+      numericValue >= 0
         ? numericValue
         : 0;
 
     visitorCountElement.textContent =
-      new Intl.NumberFormat("en-US").format(safeValue);
+      new Intl.NumberFormat(
+        "en-US"
+      ).format(
+        safeValue
+      );
+
+    localStorage.setItem(
+      LAST_COUNT_STORAGE_KEY,
+      String(safeValue)
+    );
   }
 
-  async function fetchCounter(url) {
+  async function requestVisitorCount(
+    path,
+    method = "GET"
+  ) {
+
     const response =
-      await fetch(url, {
-        method: "GET",
-        cache: "no-store"
-      });
+      await fetch(
+        `${COUNTER_API}${path}`,
+        {
+          method,
+          cache: "no-store",
+          headers: {
+            "Accept": "application/json"
+          }
+        }
+      );
 
     if (!response.ok) {
       throw new Error(
@@ -4154,62 +4174,86 @@
     const data =
       await response.json();
 
-    const value =
+    const count =
       Number(
-        data.count ??
-        data.value ??
-        data.data?.count ??
-        data.data?.value ??
-        0
+        data.count
       );
 
-    return Number.isFinite(value)
-      ? value
-      : 0;
+    if (!Number.isFinite(count)) {
+      throw new Error(
+        "Visitor counter returned an invalid count."
+      );
+    }
+
+    return count;
   }
 
   async function updateVisitorCounter() {
-    displayVisitorCount(0);
+
+    const cachedCount =
+      Number(
+        localStorage.getItem(
+          LAST_COUNT_STORAGE_KEY
+        ) || 0
+      );
+
+    displayVisitorCount(
+      cachedCount
+    );
 
     try {
-      const now = Date.now();
+
+      const now =
+        Date.now();
 
       const lastCounted =
         Number(
-          localStorage.getItem(visitStorageKey) || 0
+          localStorage.getItem(
+            VISIT_STORAGE_KEY
+          ) || 0
         );
 
       const shouldCountVisit =
         !lastCounted ||
-        now - lastCounted >= oneDayMs;
+        now - lastCounted >= ONE_DAY_MS;
 
       let count;
 
       if (shouldCountVisit) {
+
         count =
-          await fetchCounter(
-            `${counterBaseUrl}/up`
+          await requestVisitorCount(
+            "/visit",
+            "POST"
           );
 
         localStorage.setItem(
-          visitStorageKey,
+          VISIT_STORAGE_KEY,
           String(now)
         );
-      } else {
+
+      }
+      else {
+
         count =
-          await fetchCounter(
-            counterBaseUrl
+          await requestVisitorCount(
+            "/count",
+            "GET"
           );
+
       }
 
-      displayVisitorCount(count);
-    } catch (error) {
+      displayVisitorCount(
+        count
+      );
+
+    }
+    catch (error) {
+
       console.warn(
         "Visitor counter unavailable:",
         error
       );
-
-      displayVisitorCount(0);
     }
   }
 
