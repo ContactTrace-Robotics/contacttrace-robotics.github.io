@@ -1,3 +1,1616 @@
+from pathlib import Path
+from html.parser import HTMLParser
+
+src = Path("/mnt/data/Pasted text(20260812-191854).txt")
+html = src.read_text(encoding="utf-8")
+
+chat_css = r"""
+    /* =========================
+       ContactTrace activity + local AI chatbot
+       ========================= */
+
+    .activity-strip {
+      padding: 30px 24px 44px;
+    }
+
+    .activity-inner {
+      max-width: 1220px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      padding: 22px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 18px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(102, 229, 255, 0.035),
+          rgba(157, 140, 255, 0.025)
+        );
+    }
+
+    .activity-copy {
+      min-width: 220px;
+    }
+
+    .activity-copy strong {
+      display: block;
+      margin-bottom: 3px;
+      font-size: 0.95rem;
+      color: #eef8ff;
+    }
+
+    .activity-copy span {
+      color: #7f93aa;
+      font-size: 0.78rem;
+    }
+
+    .activity-stat {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-left: auto;
+    }
+
+    .activity-stat-number {
+      min-width: 60px;
+      text-align: right;
+      color: var(--cyan);
+      font-size: 1.8rem;
+      font-weight: 850;
+      letter-spacing: -1px;
+    }
+
+    .activity-stat-label {
+      color: #8ea1b8;
+      font-size: 0.78rem;
+    }
+
+    .chat-launcher {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+      z-index: 1500;
+      width: 58px;
+      height: 58px;
+      border: 1px solid rgba(102, 229, 255, 0.28);
+      border-radius: 18px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(102, 229, 255, 0.98),
+          rgba(157, 140, 255, 0.95)
+        );
+      color: #061016;
+      font: inherit;
+      font-weight: 900;
+      cursor: pointer;
+      box-shadow:
+        0 16px 45px rgba(0, 0, 0, 0.38),
+        0 0 28px rgba(102, 229, 255, 0.14);
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .chat-launcher:hover {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.42),
+        0 0 34px rgba(102, 229, 255, 0.2);
+    }
+
+    .chat-panel {
+      position: fixed;
+      right: 22px;
+      bottom: 92px;
+      z-index: 1499;
+      width: min(390px, calc(100vw - 28px));
+      height: min(610px, calc(100vh - 125px));
+      display: none;
+      grid-template-rows: auto auto 1fr auto;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      border-radius: 22px;
+      background: rgba(7, 12, 21, 0.97);
+      backdrop-filter: blur(22px);
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.48);
+    }
+
+    .chat-panel.open {
+      display: grid;
+    }
+
+    .chat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 14px;
+      padding: 17px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      background:
+        linear-gradient(
+          135deg,
+          rgba(102, 229, 255, 0.055),
+          rgba(157, 140, 255, 0.04)
+        );
+    }
+
+    .chat-brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .chat-mark {
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      background: rgba(102, 229, 255, 0.1);
+      border: 1px solid rgba(102, 229, 255, 0.18);
+      color: var(--cyan);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .chat-brand-text strong {
+      display: block;
+      font-size: 0.88rem;
+      color: #f4f9ff;
+    }
+
+    .chat-brand-text span {
+      display: block;
+      font-size: 0.67rem;
+      color: #71869e;
+    }
+
+    .chat-close {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.025);
+      color: #a9b8ca;
+      cursor: pointer;
+      font-size: 1.05rem;
+    }
+
+    .chat-ai-bar {
+      padding: 11px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      background: rgba(255, 255, 255, 0.015);
+    }
+
+    .chat-ai-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .chat-ai-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: #8ea1b8;
+      font-size: 0.69rem;
+    }
+
+    .chat-ai-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #6e8096;
+    }
+
+    .chat-ai-dot.ready {
+      background: var(--green);
+      box-shadow: 0 0 9px rgba(106, 255, 187, 0.55);
+    }
+
+    .chat-ai-dot.loading {
+      background: var(--cyan);
+      box-shadow: 0 0 9px rgba(102, 229, 255, 0.5);
+    }
+
+    .chat-ai-button {
+      border: 1px solid rgba(102, 229, 255, 0.18);
+      border-radius: 8px;
+      padding: 7px 9px;
+      background: rgba(102, 229, 255, 0.055);
+      color: #a5efff;
+      font: inherit;
+      font-size: 0.66rem;
+      font-weight: 750;
+      cursor: pointer;
+    }
+
+    .chat-ai-button:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    .chat-progress {
+      display: none;
+      height: 3px;
+      margin-top: 9px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .chat-progress.visible {
+      display: block;
+    }
+
+    .chat-progress-bar {
+      width: 0%;
+      height: 100%;
+      background:
+        linear-gradient(
+          90deg,
+          var(--cyan),
+          var(--violet)
+        );
+      transition: width 0.2s ease;
+    }
+
+    .chat-messages {
+      overflow-y: auto;
+      padding: 17px 14px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      scrollbar-width: thin;
+      scrollbar-color: rgba(102, 229, 255, 0.2) transparent;
+    }
+
+    .chat-message {
+      max-width: 88%;
+      padding: 11px 12px;
+      border-radius: 14px;
+      font-size: 0.8rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .chat-message.bot {
+      align-self: flex-start;
+      color: #b9c8d9;
+      background: rgba(255, 255, 255, 0.035);
+      border: 1px solid rgba(255, 255, 255, 0.065);
+      border-top-left-radius: 6px;
+    }
+
+    .chat-message.user {
+      align-self: flex-end;
+      color: #071019;
+      background:
+        linear-gradient(
+          135deg,
+          #79eaff,
+          #8bdcff
+        );
+      border-top-right-radius: 6px;
+    }
+
+    .chat-message.system {
+      align-self: center;
+      max-width: 96%;
+      padding: 7px 9px;
+      color: #72879e;
+      background: transparent;
+      border: none;
+      font-size: 0.66rem;
+      text-align: center;
+    }
+
+    .chat-typing::after {
+      content: "● ● ●";
+      animation: chatPulse 1s infinite;
+      letter-spacing: 2px;
+    }
+
+    @keyframes chatPulse {
+      0%, 100% { opacity: 0.35; }
+      50% { opacity: 1; }
+    }
+
+    .chat-quick {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
+      padding: 0 14px 10px;
+      background: rgba(7, 12, 21, 0.97);
+    }
+
+    .chat-quick button {
+      padding: 7px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.075);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.025);
+      color: #8ea4bb;
+      font: inherit;
+      font-size: 0.64rem;
+      cursor: pointer;
+    }
+
+    .chat-quick button:hover {
+      border-color: rgba(102, 229, 255, 0.2);
+      color: #c5f4ff;
+    }
+
+    .chat-input-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 9px;
+      padding: 12px 14px 14px;
+      border-top: 1px solid rgba(255, 255, 255, 0.065);
+      background: rgba(6, 10, 18, 0.98);
+    }
+
+    .chat-input {
+      width: 100%;
+      min-width: 0;
+      padding: 11px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 11px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.03);
+      color: #edf5ff;
+      font: inherit;
+      font-size: 0.78rem;
+    }
+
+    .chat-input:focus {
+      border-color: rgba(102, 229, 255, 0.28);
+      box-shadow: 0 0 0 3px rgba(102, 229, 255, 0.04);
+    }
+
+    .chat-send {
+      min-width: 66px;
+      border: none;
+      border-radius: 11px;
+      background:
+        linear-gradient(
+          135deg,
+          #74eaff,
+          #69d7ff
+        );
+      color: #061016;
+      font: inherit;
+      font-size: 0.75rem;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .chat-send:disabled {
+      opacity: 0.55;
+      cursor: default;
+    }
+
+    @media (max-width: 700px) {
+      .activity-stat {
+        margin-left: 0;
+      }
+
+      .chat-launcher {
+        right: 14px;
+        bottom: 14px;
+      }
+
+      .chat-panel {
+        right: 14px;
+        bottom: 82px;
+        height: min(620px, calc(100vh - 105px));
+      }
+    }
+"""
+
+activity_html = r"""
+<section class="activity-strip" aria-label="ContactTrace website activity">
+  <div class="activity-inner">
+    <div class="activity-copy">
+      <strong>ContactTrace Activity</strong>
+      <span>Public site counter · approximate unique browser visits</span>
+    </div>
+
+    <div class="activity-stat">
+      <span
+        class="activity-stat-number"
+        id="visitor-count"
+        aria-live="polite"
+      >
+        —
+      </span>
+
+      <span class="activity-stat-label">
+        site visitors
+      </span>
+    </div>
+  </div>
+</section>
+
+
+<button
+  class="chat-launcher"
+  id="chat-launcher"
+  type="button"
+  aria-label="Open Ask ContactTrace chatbot"
+  aria-expanded="false"
+>
+  AI
+</button>
+
+
+<aside
+  class="chat-panel"
+  id="chat-panel"
+  aria-label="Ask ContactTrace"
+>
+
+  <div class="chat-header">
+
+    <div class="chat-brand">
+      <div class="chat-mark">CT</div>
+
+      <div class="chat-brand-text">
+        <strong>Ask ContactTrace</strong>
+        <span>Research assistant</span>
+      </div>
+    </div>
+
+    <button
+      class="chat-close"
+      id="chat-close"
+      type="button"
+      aria-label="Close chatbot"
+    >
+      ×
+    </button>
+
+  </div>
+
+
+  <div class="chat-ai-bar">
+
+    <div class="chat-ai-top">
+
+      <div class="chat-ai-status">
+        <span
+          class="chat-ai-dot"
+          id="chat-ai-dot"
+        ></span>
+
+        <span id="chat-ai-status">
+          Instant site answers · Local AI optional
+        </span>
+      </div>
+
+      <button
+        class="chat-ai-button"
+        id="enable-local-ai"
+        type="button"
+      >
+        Enable Local AI
+      </button>
+
+    </div>
+
+    <div
+      class="chat-progress"
+      id="chat-progress"
+      aria-hidden="true"
+    >
+      <div
+        class="chat-progress-bar"
+        id="chat-progress-bar"
+      ></div>
+    </div>
+
+  </div>
+
+
+  <div
+    class="chat-messages"
+    id="chat-messages"
+    aria-live="polite"
+  >
+
+    <div class="chat-message bot">
+      Hi — I’m the ContactTrace research assistant. Ask me about ContactTrace Sim, Real2Isaac / Real2Sim, open research topics, student collaboration, ROS 2, simulation or policy evaluation.
+    </div>
+
+    <div class="chat-message system">
+      Fast answers work immediately. Local AI runs in your browser after you choose “Enable Local AI”.
+    </div>
+
+  </div>
+
+
+  <div class="chat-quick" id="chat-quick">
+    <button type="button" data-question="What is ContactTrace Sim?">
+      ContactTrace Sim
+    </button>
+
+    <button type="button" data-question="What is Real2Sim?">
+      Real2Sim
+    </button>
+
+    <button type="button" data-question="What research topics are open?">
+      Open research
+    </button>
+
+    <button type="button" data-question="How can a student collaborate?">
+      Student collaboration
+    </button>
+  </div>
+
+
+  <form
+    class="chat-input-row"
+    id="chat-form"
+  >
+
+    <input
+      class="chat-input"
+      id="chat-input"
+      type="text"
+      autocomplete="off"
+      maxlength="500"
+      placeholder="Ask about ContactTrace..."
+      aria-label="Chat message"
+    />
+
+    <button
+      class="chat-send"
+      id="chat-send"
+      type="submit"
+    >
+      Send
+    </button>
+
+  </form>
+
+</aside>
+"""
+
+chat_js = r"""
+<script type="module">
+
+  /* ============================================================
+     ContactTrace visitor counter
+     ============================================================
+
+     Uses CounterAPI V1 because the website is currently static.
+     We count this browser at most once every 24 hours.
+
+     NOTE:
+     This is an approximate public counter, not audited analytics.
+     Clearing local storage, another browser/device, bots, etc.
+     can affect the count.
+  */
+
+  const VISITOR_NAMESPACE =
+    "contacttrace-robotics.github.io";
+
+  const VISITOR_COUNTER =
+    "homepage-unique-browser-visits";
+
+  const VISITOR_API =
+    `https://api.counterapi.dev/v1/${VISITOR_NAMESPACE}/${VISITOR_COUNTER}`;
+
+  const visitorCountElement =
+    document.getElementById("visitor-count");
+
+  const visitStorageKey =
+    "contacttrace_last_counted_visit";
+
+  const oneDayMs =
+    24 * 60 * 60 * 1000;
+
+
+  async function getCounterValue(url) {
+
+    const response =
+      await fetch(
+        url,
+        {
+          method: "GET",
+          cache: "no-store"
+        }
+      );
+
+
+    if (!response.ok) {
+      throw new Error(
+        `Counter request failed: ${response.status}`
+      );
+    }
+
+
+    const data =
+      await response.json();
+
+
+    const possibleValue =
+      data.value ??
+      data.count ??
+      data.data?.value ??
+      data.data?.count;
+
+
+    const numericValue =
+      Number(possibleValue);
+
+
+    if (!Number.isFinite(numericValue)) {
+      throw new Error(
+        "Counter response did not contain a numeric value."
+      );
+    }
+
+
+    return numericValue;
+
+  }
+
+
+  async function updateVisitorCounter() {
+
+    try {
+
+      const now =
+        Date.now();
+
+
+      const previousVisit =
+        Number(
+          localStorage.getItem(
+            visitStorageKey
+          ) || 0
+        );
+
+
+      const shouldCount =
+        !previousVisit ||
+        now - previousVisit >= oneDayMs;
+
+
+      const endpoint =
+        shouldCount
+          ? `${VISITOR_API}/up`
+          : VISITOR_API;
+
+
+      const value =
+        await getCounterValue(
+          endpoint
+        );
+
+
+      if (shouldCount) {
+
+        localStorage.setItem(
+          visitStorageKey,
+          String(now)
+        );
+
+      }
+
+
+      visitorCountElement.textContent =
+        new Intl.NumberFormat(
+          "en-US"
+        ).format(
+          value
+        );
+
+    }
+    catch (error) {
+
+      console.warn(
+        "Visitor counter unavailable:",
+        error
+      );
+
+
+      visitorCountElement.textContent =
+        "—";
+
+    }
+
+  }
+
+
+  updateVisitorCounter();
+
+
+
+  /* ============================================================
+     Ask ContactTrace chatbot
+     ============================================================ */
+
+  const chatLauncher =
+    document.getElementById("chat-launcher");
+
+  const chatPanel =
+    document.getElementById("chat-panel");
+
+  const chatClose =
+    document.getElementById("chat-close");
+
+  const chatMessages =
+    document.getElementById("chat-messages");
+
+  const chatForm =
+    document.getElementById("chat-form");
+
+  const chatInput =
+    document.getElementById("chat-input");
+
+  const chatSend =
+    document.getElementById("chat-send");
+
+  const quickButtons =
+    document.querySelectorAll(
+      "#chat-quick [data-question]"
+    );
+
+  const enableLocalAIButton =
+    document.getElementById("enable-local-ai");
+
+  const aiStatus =
+    document.getElementById("chat-ai-status");
+
+  const aiDot =
+    document.getElementById("chat-ai-dot");
+
+  const aiProgress =
+    document.getElementById("chat-progress");
+
+  const aiProgressBar =
+    document.getElementById("chat-progress-bar");
+
+
+  let localAIEngine =
+    null;
+
+  let localAIReady =
+    false;
+
+  let localAILoading =
+    false;
+
+
+  const localAIModel =
+    "Llama-3.2-1B-Instruct-q4f16_1-MLC";
+
+
+  const conversation =
+    [];
+
+
+  const CONTACTTRACE_CONTEXT = `
+You are Ask ContactTrace, the website research assistant for ContactTrace Robotics.
+
+Your job is to answer questions using ONLY the ContactTrace information below.
+If the requested information is not provided, say that you do not know yet and suggest contacting ContactTrace Robotics at contacttrace.robotics@gmail.com.
+
+Keep answers concise, factual and professional.
+Never pretend that a planned feature is already complete.
+Clearly distinguish active prototypes/research from future platform plans.
+
+CONTACTTRACE ROBOTICS
+
+ContactTrace Robotics is an independent robotics research initiative focused on robot simulation, automated testing, robot-policy benchmarking, failure analysis, real-world-to-simulation workflows and sim-to-real validation.
+
+Founder:
+M A Hafiz — Founder & Robotics Research Engineer.
+
+Website:
+https://contacttrace-robotics.github.io
+
+GitHub:
+https://github.com/ContactTrace-Robotics
+
+LinkedIn:
+https://www.linkedin.com/company/contacttrace-robotics/
+
+Email:
+contacttrace.robotics@gmail.com
+
+CURRENT FEATURED PROJECTS
+
+1. Robot Evaluation Platform
+An automated infrastructure for running robot-policy experiments, detecting regressions, classifying failures and producing structured evaluation reports.
+Technologies include MuJoCo, FastAPI, CI and benchmarking.
+
+2. Real2Isaac
+An active real-world-to-simulation research pipeline that reconstructs captured environments and prepares them for physics and robot interaction in NVIDIA Isaac Sim.
+Technologies include Isaac Sim, COLMAP, Gaussian Splatting and USD.
+
+3. Failure-Aware Evaluation
+Research into automated robot-policy failure discovery and targeted scenario generation for evaluation, debugging and iterative improvement.
+
+CONTACTTRACE SIM — PLATFORM VISION
+
+ContactTrace Sim is in development.
+The goal is a common robotics workflow connecting:
+Capture -> Build -> Evaluate -> Validate.
+
+Planned / explored capabilities include:
+- phone-to-simulation / Real2Sim
+- robot import through formats such as URDF
+- a simulator-independent interface
+- potential backends including MuJoCo, Gazebo and Isaac Sim
+- automated policy benchmarking
+- ROS 2 simulation-to-robot workflows
+- browser and phone control
+
+Do not state that all of these features are already implemented.
+
+OPEN RESEARCH TOPICS
+
+1. Failure-Aware Robot Policy Evaluation
+2. Sim-to-Real Gap Measurement
+3. Automatic Scenario Generation
+4. Robot Policy Regression Testing
+5. Real-World-to-Simulation Automation
+6. Human-Guided Robot Policy Correction
+
+STUDENT / RESEARCH COLLABORATION
+
+ContactTrace Robotics welcomes students, researchers and independent contributors interested in practical robotics research.
+Bachelor's and Master's thesis collaborations may be possible subject to approval and academic supervision by the student's home university.
+Interested people can email contacttrace.robotics@gmail.com.
+
+RESEARCH AREAS
+
+Robot Simulation
+Policy Evaluation
+Failure Analysis
+Sim-to-Real
+Robot Manipulation
+Benchmarking
+`.trim();
+
+
+  function openChat() {
+
+    chatPanel.classList.add(
+      "open"
+    );
+
+
+    chatLauncher.setAttribute(
+      "aria-expanded",
+      "true"
+    );
+
+
+    setTimeout(
+      () => chatInput.focus(),
+      80
+    );
+
+  }
+
+
+  function closeChat() {
+
+    chatPanel.classList.remove(
+      "open"
+    );
+
+
+    chatLauncher.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }
+
+
+  chatLauncher.addEventListener(
+    "click",
+    () => {
+
+      if (
+        chatPanel.classList.contains(
+          "open"
+        )
+      ) {
+        closeChat();
+      }
+      else {
+        openChat();
+      }
+
+    }
+  );
+
+
+  chatClose.addEventListener(
+    "click",
+    closeChat
+  );
+
+
+  function addMessage(
+    text,
+    role = "bot"
+  ) {
+
+    const element =
+      document.createElement(
+        "div"
+      );
+
+
+    element.className =
+      `chat-message ${role}`;
+
+
+    element.textContent =
+      text;
+
+
+    chatMessages.appendChild(
+      element
+    );
+
+
+    chatMessages.scrollTop =
+      chatMessages.scrollHeight;
+
+
+    return element;
+
+  }
+
+
+  function normalizeText(text) {
+
+    return text
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9\s\-]/g,
+        " "
+      )
+      .replace(
+        /\s+/g,
+        " "
+      )
+      .trim();
+
+  }
+
+
+  function instantAnswer(question) {
+
+    const q =
+      normalizeText(
+        question
+      );
+
+
+    if (
+      q.includes("contacttrace sim") ||
+      (
+        q.includes("platform") &&
+        q.includes("sim")
+      )
+    ) {
+
+      return "ContactTrace Sim is the platform vision currently in development. The goal is to connect real-world capture, robot import, simulation, automated policy evaluation and sim-to-real validation through a common Capture → Build → Evaluate → Validate workflow.";
+
+    }
+
+
+    if (
+      q.includes("real2sim") ||
+      q.includes("phone to simulation") ||
+      q.includes("phone-to-simulation") ||
+      q.includes("real to sim")
+    ) {
+
+      return "Real2Sim is the planned evolution of the real-world reconstruction work: capture an environment using a phone or other input, reconstruct it, prepare robot-ready scene geometry and connect it to simulation. It is a development direction rather than a claim that every part is already finished.";
+
+    }
+
+
+    if (
+      q.includes("real2isaac") ||
+      q.includes("real to isaac")
+    ) {
+
+      return "Real2Isaac is an active real-world-to-simulation research pipeline that reconstructs captured environments and prepares them for physics and robot interaction in NVIDIA Isaac Sim. The project uses tools including COLMAP, Gaussian Splatting and USD.";
+
+    }
+
+
+    if (
+      q.includes("research topic") ||
+      q.includes("open research") ||
+      q.includes("topic available") ||
+      q.includes("topics available")
+    ) {
+
+      return "Current open topics are: Failure-Aware Robot Policy Evaluation; Sim-to-Real Gap Measurement; Automatic Scenario Generation; Robot Policy Regression Testing; Real-World-to-Simulation Automation; and Human-Guided Robot Policy Correction.";
+
+    }
+
+
+    if (
+      q.includes("student") ||
+      q.includes("bachelor") ||
+      q.includes("master") ||
+      q.includes("thesis") ||
+      q.includes("collaborat")
+    ) {
+
+      return "Students and researchers are welcome to propose research collaboration. Bachelor's and Master's thesis collaborations may be possible if the student's home university approves the project and provides the required academic supervision. Contact: contacttrace.robotics@gmail.com.";
+
+    }
+
+
+    if (
+      q.includes("urdf") ||
+      q.includes("import robot") ||
+      q.includes("own robot")
+    ) {
+
+      return "Robot import, including URDF-style robot descriptions, is part of the ContactTrace Sim development direction. The website currently describes this as a planned capability, not as a fully released feature.";
+
+    }
+
+
+    if (
+      q.includes("ros2") ||
+      q.includes("ros 2")
+    ) {
+
+      return "ROS 2 is part of the ContactTrace research and platform direction for connecting simulation workflows with robotic systems. A simulation-to-robot bridge is described as an explored ContactTrace Sim capability.";
+
+    }
+
+
+    if (
+      q.includes("mujoco") ||
+      q.includes("gazebo") ||
+      q.includes("isaac sim") ||
+      q.includes("simulator")
+    ) {
+
+      return "Current research uses simulation technologies including MuJoCo and NVIDIA Isaac Sim, with ROS 2 for robot integration. ContactTrace Sim is being designed around a simulator-independent direction that may target MuJoCo, Gazebo and Isaac Sim.";
+
+    }
+
+
+    if (
+      q.includes("evaluation") ||
+      q.includes("benchmark") ||
+      q.includes("failure")
+    ) {
+
+      return "A central ContactTrace focus is automated robot-policy evaluation: repeatable simulation trials, measurable metrics, regression detection, failure classification and targeted testing before real-world deployment.";
+
+    }
+
+
+    if (
+      q.includes("founder") ||
+      q.includes("hafiz")
+    ) {
+
+      return "ContactTrace Robotics was founded by M A Hafiz, a robotics engineer and researcher working on robot simulation, manipulation, automated evaluation, digital twins, robot control and sim-to-real systems.";
+
+    }
+
+
+    if (
+      q.includes("email") ||
+      q.includes("contact") ||
+      q.includes("reach")
+    ) {
+
+      return "You can contact ContactTrace Robotics at contacttrace.robotics@gmail.com. The organization is also on GitHub and LinkedIn.";
+
+    }
+
+
+    if (
+      q.includes("what is contacttrace") ||
+      q === "contacttrace" ||
+      q.includes("contacttrace robotics")
+    ) {
+
+      return "ContactTrace Robotics is an independent robotics research initiative focused on simulation, automated testing, robot-policy benchmarking, failure analysis, real-world-to-simulation workflows and sim-to-real validation.";
+
+    }
+
+
+    return "I can answer common ContactTrace questions immediately. For a more flexible answer, choose “Enable Local AI” above. You can ask about ContactTrace Sim, Real2Isaac / Real2Sim, open research, student collaboration, robot import, ROS 2 or policy evaluation.";
+
+  }
+
+
+  function setChatBusy(
+    busy
+  ) {
+
+    chatSend.disabled =
+      busy;
+
+
+    chatInput.disabled =
+      busy;
+
+  }
+
+
+  async function askLocalAI(
+    question
+  ) {
+
+    const recentConversation =
+      conversation.slice(
+        -6
+      );
+
+
+    const messages =
+      [
+        {
+          role: "system",
+          content: CONTACTTRACE_CONTEXT
+        },
+        ...recentConversation,
+        {
+          role: "user",
+          content: question
+        }
+      ];
+
+
+    const response =
+      await localAIEngine
+        .chat
+        .completions
+        .create({
+          messages,
+          temperature: 0.25,
+          top_p: 0.9,
+          max_tokens: 260
+        });
+
+
+    const answer =
+      response
+        ?.choices
+        ?.[0]
+        ?.message
+        ?.content
+        ?.trim();
+
+
+    if (!answer) {
+      throw new Error(
+        "The local model returned an empty response."
+      );
+    }
+
+
+    conversation.push(
+      {
+        role: "user",
+        content: question
+      },
+      {
+        role: "assistant",
+        content: answer
+      }
+    );
+
+
+    return answer;
+
+  }
+
+
+  async function sendQuestion(
+    rawQuestion
+  ) {
+
+    const question =
+      rawQuestion.trim();
+
+
+    if (!question) {
+      return;
+    }
+
+
+    addMessage(
+      question,
+      "user"
+    );
+
+
+    chatInput.value =
+      "";
+
+
+    setChatBusy(
+      true
+    );
+
+
+    const typing =
+      addMessage(
+        "",
+        "bot chat-typing"
+      );
+
+
+    try {
+
+      let answer;
+
+
+      if (localAIReady) {
+
+        answer =
+          await askLocalAI(
+            question
+          );
+
+      }
+      else {
+
+        await new Promise(
+          resolve =>
+            setTimeout(
+              resolve,
+              180
+            )
+        );
+
+
+        answer =
+          instantAnswer(
+            question
+          );
+
+      }
+
+
+      typing.remove();
+
+
+      addMessage(
+        answer,
+        "bot"
+      );
+
+    }
+    catch (error) {
+
+      console.error(
+        "Chat error:",
+        error
+      );
+
+
+      typing.remove();
+
+
+      addMessage(
+        instantAnswer(
+          question
+        ),
+        "bot"
+      );
+
+
+      addMessage(
+        "Local AI was unavailable, so I used the built-in ContactTrace knowledge instead.",
+        "system"
+      );
+
+    }
+    finally {
+
+      setChatBusy(
+        false
+      );
+
+
+      chatInput.focus();
+
+    }
+
+  }
+
+
+  chatForm.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+
+      sendQuestion(
+        chatInput.value
+      );
+
+    }
+  );
+
+
+  quickButtons.forEach(
+    button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          openChat();
+
+
+          sendQuestion(
+            button.dataset.question || ""
+          );
+
+        }
+      );
+
+    }
+  );
+
+
+  enableLocalAIButton.addEventListener(
+    "click",
+    async () => {
+
+      if (
+        localAIReady ||
+        localAILoading
+      ) {
+        return;
+      }
+
+
+      if (!("gpu" in navigator)) {
+
+        aiStatus.textContent =
+          "WebGPU unavailable — instant answers remain active";
+
+
+        addMessage(
+          "This browser does not expose WebGPU, so the local model cannot run here. The built-in ContactTrace assistant still works without a model.",
+          "system"
+        );
+
+
+        return;
+
+      }
+
+
+      localAILoading =
+        true;
+
+
+      enableLocalAIButton.disabled =
+        true;
+
+
+      enableLocalAIButton.textContent =
+        "Loading…";
+
+
+      aiDot.classList.add(
+        "loading"
+      );
+
+
+      aiProgress.classList.add(
+        "visible"
+      );
+
+
+      try {
+
+        aiStatus.textContent =
+          "Preparing local AI…";
+
+
+        const webllm =
+          await import(
+            "https://esm.run/@mlc-ai/web-llm"
+          );
+
+
+        localAIEngine =
+          await webllm.CreateMLCEngine(
+            localAIModel,
+            {
+              initProgressCallback:
+                progress => {
+
+                  const percentage =
+                    Math.max(
+                      0,
+                      Math.min(
+                        100,
+                        Math.round(
+                          (
+                            progress.progress ||
+                            0
+                          ) * 100
+                        )
+                      )
+                    );
+
+
+                  aiProgressBar.style.width =
+                    `${percentage}%`;
+
+
+                  aiStatus.textContent =
+                    percentage < 100
+                      ? `Downloading / loading local AI · ${percentage}%`
+                      : "Finalizing local AI…";
+
+                }
+            }
+          );
+
+
+        localAIReady =
+          true;
+
+
+        aiDot.classList.remove(
+          "loading"
+        );
+
+
+        aiDot.classList.add(
+          "ready"
+        );
+
+
+        aiProgressBar.style.width =
+          "100%";
+
+
+        aiStatus.textContent =
+          "Local AI ready · runs in this browser";
+
+
+        enableLocalAIButton.textContent =
+          "Local AI Ready";
+
+
+        addMessage(
+          "Local AI is ready. The model now runs in this browser and is guided by ContactTrace website knowledge.",
+          "system"
+        );
+
+
+        setTimeout(
+          () => {
+            aiProgress.classList.remove(
+              "visible"
+            );
+          },
+          1200
+        );
+
+      }
+      catch (error) {
+
+        console.error(
+          "Local AI initialization failed:",
+          error
+        );
+
+
+        localAIEngine =
+          null;
+
+
+        localAIReady =
+          false;
+
+
+        aiDot.classList.remove(
+          "loading"
+        );
+
+
+        aiProgress.classList.remove(
+          "visible"
+        );
+
+
+        aiStatus.textContent =
+          "Local AI unavailable · instant answers active";
+
+
+        enableLocalAIButton.disabled =
+          false;
+
+
+        enableLocalAIButton.textContent =
+          "Try Local AI";
+
+
+        addMessage(
+          "The local model could not start on this device. This can happen when WebGPU support or available GPU memory is insufficient. The built-in ContactTrace assistant remains available.",
+          "system"
+        );
+
+      }
+      finally {
+
+        localAILoading =
+          false;
+
+      }
+
+    }
+  );
+
+</script>
+"""
+
+# Insert CSS before the site's existing closing style.
+if "/* =========================\n       ContactTrace activity + local AI chatbot" not in html:
+    html = html.replace("</style>", chat_css + "\n  </style>", 1)
+
+# Insert activity section and chatbot immediately before footer, so the visitor count
+# appears near the bottom but the floating chatbot is globally available.
+if 'id="chat-launcher"' not in html:
+    html = html.replace("<footer>", activity_html + "\n\n<footer>", 1)
+
+# Add separate module script before the final </body>.
+if "ContactTrace visitor counter" not in html:
+    html = html.replace("</body>", chat_js + "\n\n</body>", 1)
+
+out = Path("/mnt/data/index_with_contacttrace_chatbot.html")
+out.write_text(html, encoding="utf-8")
+
+# Basic structural validation
+class BasicHTMLCheck(HTMLParser):
+    pass
+
+parser = BasicHTMLCheck()
+parser.feed(html)
+
+checks = {
+    "output_exists": out.exists(),
+    "chat_launcher": 'id="chat-launcher"' in html,
+    "chat_panel": 'id="chat-panel"' in html,
+    "visitor_counter": 'id="visitor-count"' in html,
+    "webllm_import": 'https://esm.run/@mlc-ai/web-llm' in html,
+    "llama_model": 'Llama-3.2-1B-Instruct-q4f16_1-MLC' in html,
+    "original_threejs": 'three@0.185.0' in html,
+    "founder_image": 'src="founder.jpg"' in html,
+}
+print(checks)
+print(f"Created: {out}")
+print(f"Lines: {len(html.splitlines())}")
 <!DOCTYPE html>
 <html lang="en">
 <head>
