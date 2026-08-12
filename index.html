@@ -1194,8 +1194,7 @@
       justify-content: space-between;
       align-items: center;
       gap: 24px;
-      flex-wrap: wrap;
-      padding: 22px 24px;
+      padding: 25px 28px;
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 18px;
       background:
@@ -1212,35 +1211,39 @@
 
     .activity-copy strong {
       display: block;
-      margin-bottom: 3px;
+      margin-bottom: 5px;
+      color: #ffffff;
       font-size: 0.95rem;
-      color: #eef8ff;
+      font-weight: 800;
     }
 
     .activity-copy span {
-      color: #7f93aa;
+      color: #7890aa;
       font-size: 0.78rem;
     }
 
-    .activity-stat {
-      display: flex;
-      align-items: baseline;
-      gap: 10px;
+    .visitor-display {
       margin-left: auto;
+      text-align: right;
     }
 
-    .activity-stat-number {
-      min-width: 60px;
-      text-align: right;
+    .visitor-display strong {
+      display: block;
+      min-width: 80px;
       color: var(--cyan);
-      font-size: 1.8rem;
+      font-size: 2.15rem;
+      line-height: 1;
       font-weight: 850;
       letter-spacing: -1px;
     }
 
-    .activity-stat-label {
-      color: #8ea1b8;
-      font-size: 0.78rem;
+    .visitor-display span {
+      display: block;
+      margin-top: 7px;
+      color: #7f93aa;
+      font-size: 0.67rem;
+      font-weight: 700;
+      letter-spacing: 1.3px;
     }
 
     .chat-launcher {
@@ -1571,8 +1574,8 @@
     }
 
     @media (max-width: 700px) {
-      .activity-stat {
-        margin-left: 0;
+      .visitor-display {
+        margin-left: auto;
       }
 
       .chat-launcher {
@@ -2779,24 +2782,17 @@
 
 <section class="activity-strip" aria-label="ContactTrace website activity">
   <div class="activity-inner">
+
     <div class="activity-copy">
       <strong>ContactTrace Activity</strong>
-      <span>Public site counter · approximate unique browser visits</span>
+      <span>Public website activity</span>
     </div>
 
-    <div class="activity-stat">
-      <span
-        class="activity-stat-number"
-        id="visitor-count"
-        aria-live="polite"
-      >
-        —
-      </span>
-
-      <span class="activity-stat-label">
-        site visitors
-      </span>
+    <div class="visitor-display">
+      <strong id="visitor-count" aria-live="polite">0</strong>
+      <span>VISITORS</span>
     </div>
+
   </div>
 </section>
 
@@ -4111,25 +4107,7 @@
 
   /* ============================================================
      ContactTrace visitor counter
-     ============================================================
-
-     Uses CounterAPI V1 because the website is currently static.
-     We count this browser at most once every 24 hours.
-
-     NOTE:
-     This is an approximate public counter, not audited analytics.
-     Clearing local storage, another browser/device, bots, etc.
-     can affect the count.
-  */
-
-  const VISITOR_NAMESPACE =
-    "contacttrace-robotics.github.io";
-
-  const VISITOR_COUNTER =
-    "homepage-unique-browser-visits";
-
-  const VISITOR_API =
-    `https://api.counterapi.dev/v1/${VISITOR_NAMESPACE}/${VISITOR_COUNTER}`;
+     ============================================================ */
 
   const visitorCountElement =
     document.getElementById("visitor-count");
@@ -4140,119 +4118,100 @@
   const oneDayMs =
     24 * 60 * 60 * 1000;
 
+  const counterNamespace =
+    "contacttrace-robotics";
 
-  async function getCounterValue(url) {
+  const counterName =
+    "website-visitors";
 
+  const counterBaseUrl =
+    `https://api.counterapi.dev/v1/${counterNamespace}/${counterName}`;
+
+  function displayVisitorCount(value) {
+    const numericValue = Number(value);
+    const safeValue =
+      Number.isFinite(numericValue)
+        ? numericValue
+        : 0;
+
+    visitorCountElement.textContent =
+      new Intl.NumberFormat("en-US").format(safeValue);
+  }
+
+  async function fetchCounter(url) {
     const response =
-      await fetch(
-        url,
-        {
-          method: "GET",
-          cache: "no-store"
-        }
-      );
-
+      await fetch(url, {
+        method: "GET",
+        cache: "no-store"
+      });
 
     if (!response.ok) {
       throw new Error(
-        `Counter request failed: ${response.status}`
+        `Visitor counter request failed: ${response.status}`
       );
     }
-
 
     const data =
       await response.json();
 
-
-    const possibleValue =
-      data.value ??
-      data.count ??
-      data.data?.value ??
-      data.data?.count;
-
-
-    const numericValue =
-      Number(possibleValue);
-
-
-    if (!Number.isFinite(numericValue)) {
-      throw new Error(
-        "Counter response did not contain a numeric value."
+    const value =
+      Number(
+        data.count ??
+        data.value ??
+        data.data?.count ??
+        data.data?.value ??
+        0
       );
-    }
 
-
-    return numericValue;
-
+    return Number.isFinite(value)
+      ? value
+      : 0;
   }
 
-
   async function updateVisitorCounter() {
+    displayVisitorCount(0);
 
     try {
+      const now = Date.now();
 
-      const now =
-        Date.now();
-
-
-      const previousVisit =
+      const lastCounted =
         Number(
-          localStorage.getItem(
-            visitStorageKey
-          ) || 0
+          localStorage.getItem(visitStorageKey) || 0
         );
 
+      const shouldCountVisit =
+        !lastCounted ||
+        now - lastCounted >= oneDayMs;
 
-      const shouldCount =
-        !previousVisit ||
-        now - previousVisit >= oneDayMs;
+      let count;
 
-
-      const endpoint =
-        shouldCount
-          ? `${VISITOR_API}/up`
-          : VISITOR_API;
-
-
-      const value =
-        await getCounterValue(
-          endpoint
-        );
-
-
-      if (shouldCount) {
+      if (shouldCountVisit) {
+        count =
+          await fetchCounter(
+            `${counterBaseUrl}/up`
+          );
 
         localStorage.setItem(
           visitStorageKey,
           String(now)
         );
-
+      } else {
+        count =
+          await fetchCounter(
+            counterBaseUrl
+          );
       }
 
-
-      visitorCountElement.textContent =
-        new Intl.NumberFormat(
-          "en-US"
-        ).format(
-          value
-        );
-
-    }
-    catch (error) {
-
+      displayVisitorCount(count);
+    } catch (error) {
       console.warn(
         "Visitor counter unavailable:",
         error
       );
 
-
-      visitorCountElement.textContent =
-        "—";
-
+      displayVisitorCount(0);
     }
-
   }
-
 
   updateVisitorCounter();
 
