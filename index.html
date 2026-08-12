@@ -4107,6 +4107,7 @@
 
   /* ============================================================
      ContactTrace visitor counter — Cloudflare Worker + KV
+     Server-side duplicate protection
      ============================================================ */
 
   const visitorCountElement =
@@ -4115,25 +4116,52 @@
   const COUNTER_API =
     "https://contacttrace-visitor-counter.hafizsourav44.workers.dev";
 
-  const VISIT_STORAGE_KEY =
-    "contacttrace_last_counted_visit_v2";
+  const VISITOR_ID_KEY =
+    "contacttrace_visitor_id";
 
-  const LAST_COUNT_STORAGE_KEY =
+  const LAST_COUNT_KEY =
     "contacttrace_last_visitor_count";
 
-  const ONE_DAY_MS =
-    24 * 60 * 60 * 1000;
+
+  function getOrCreateVisitorId() {
+
+    let visitorId =
+      localStorage.getItem(
+        VISITOR_ID_KEY
+      );
+
+
+    if (!visitorId) {
+
+      visitorId =
+        crypto.randomUUID();
+
+
+      localStorage.setItem(
+        VISITOR_ID_KEY,
+        visitorId
+      );
+
+    }
+
+
+    return visitorId;
+
+  }
+
 
   function displayVisitorCount(value) {
 
     const numericValue =
       Number(value);
 
+
     const safeValue =
       Number.isFinite(numericValue) &&
       numericValue >= 0
         ? numericValue
         : 0;
+
 
     visitorCountElement.textContent =
       new Intl.NumberFormat(
@@ -4142,110 +4170,86 @@
         safeValue
       );
 
+
     localStorage.setItem(
-      LAST_COUNT_STORAGE_KEY,
+      LAST_COUNT_KEY,
       String(safeValue)
     );
+
   }
 
-  async function requestVisitorCount(
-    path,
-    method = "GET"
-  ) {
+
+  async function registerVisit() {
+
+    const visitorId =
+      getOrCreateVisitorId();
+
 
     const response =
       await fetch(
-        `${COUNTER_API}${path}`,
+        `${COUNTER_API}/visit`,
         {
-          method,
+          method: "POST",
           cache: "no-store",
           headers: {
+            "Content-Type": "application/json",
             "Accept": "application/json"
-          }
+          },
+          body: JSON.stringify({
+            visitorId
+          })
         }
       );
 
+
     if (!response.ok) {
+
       throw new Error(
         `Visitor counter request failed: ${response.status}`
       );
+
     }
+
 
     const data =
       await response.json();
 
-    const count =
-      Number(
-        data.count
-      );
 
-    if (!Number.isFinite(count)) {
-      throw new Error(
-        "Visitor counter returned an invalid count."
-      );
-    }
+    return Number(
+      data.count
+    );
 
-    return count;
   }
+
 
   async function updateVisitorCounter() {
 
     const cachedCount =
       Number(
         localStorage.getItem(
-          LAST_COUNT_STORAGE_KEY
+          LAST_COUNT_KEY
         ) || 0
       );
+
 
     displayVisitorCount(
       cachedCount
     );
 
+
     try {
 
-      const now =
-        Date.now();
+      const count =
+        await registerVisit();
 
-      const lastCounted =
-        Number(
-          localStorage.getItem(
-            VISIT_STORAGE_KEY
-          ) || 0
-        );
 
-      const shouldCountVisit =
-        !lastCounted ||
-        now - lastCounted >= ONE_DAY_MS;
+      if (Number.isFinite(count)) {
 
-      let count;
-
-      if (shouldCountVisit) {
-
-        count =
-          await requestVisitorCount(
-            "/visit",
-            "POST"
-          );
-
-        localStorage.setItem(
-          VISIT_STORAGE_KEY,
-          String(now)
+        displayVisitorCount(
+          count
         );
 
       }
-      else {
-
-        count =
-          await requestVisitorCount(
-            "/count",
-            "GET"
-          );
-
-      }
-
-      displayVisitorCount(
-        count
-      );
 
     }
     catch (error) {
@@ -4254,8 +4258,11 @@
         "Visitor counter unavailable:",
         error
       );
+
     }
+
   }
+
 
   updateVisitorCounter();
 
