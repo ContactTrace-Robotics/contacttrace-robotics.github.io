@@ -32,7 +32,28 @@
       --violet: #9d8cff;
       --green: #6affbb;
     }
+    .project-video {
+  margin-top: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #02050a;
+}
 
+.project-video video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: #000;
+}
+
+.video-caption {
+  display: block;
+  padding: 10px 14px;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
     body {
       font-family:
         Inter,
@@ -2000,6 +2021,16 @@
             captured environments and prepares them for
             physics and robot interaction inside NVIDIA Isaac Sim.
           </p>
+          <div class="project-video">
+  <video controls playsinline preload="metadata">
+    <source src="Final_final.mp4" type="video/mp4" />
+    Your browser does not support MP4 video.
+  </video>
+
+  <span class="video-caption">
+    Real2Isaac prototype — from real-world capture to robot simulation
+  </span>
+</div>
 
         </div>
 
